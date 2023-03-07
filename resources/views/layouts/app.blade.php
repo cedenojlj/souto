@@ -9,12 +9,21 @@
 
     <title>{{ config('app.name', 'SoutoFoods') }}</title>
 
+    
+
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    
+    @livewireStyles
+
+    <link rel="stylesheet" href="/css/style.css">
+
 </head>
 <body>
     <div id="app">
@@ -51,7 +60,15 @@
                         @else
                             
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('users.index') }}">{{ Vendors }}</a>
+                            <a class="nav-link" href="{{ route('users.index') }}"> Vendors</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('customers.index') }}"> Customers</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('products.index') }}"> Products</a>
                         </li>
 
                             <li class="nav-item dropdown">
@@ -81,5 +98,10 @@
             @yield('content')
         </main>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+   
+    @livewireScripts
+
 </body>
 </html>

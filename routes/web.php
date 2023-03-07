@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CustomerController;
+use App\Models\Product;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,17 +18,29 @@ use App\Http\Controllers\UserController;
 |
 */
 
- Route::get('/', function () {
+ /* Route::get('/', function () {
     return view('welcome');
-});
+}); */
 
-/* Route::get('/', function () {
+Route::get('/', function () {
     return view('auth.login');
 });
- */
+ 
+
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::resource('/users', UserController::class);
+
+Route::resource('/customers', CustomerController::class);
+
+Route::resource('/products', ProductController::class);
+
+
+
+Route::get('addtocart/{product}',[ ProductController::class,'addtoCart'])->name('addtocart');
+
+Route::post('/addtocart',[ ProductController::class,'savetocart'])->name('savetocart');
+

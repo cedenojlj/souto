@@ -1,15 +1,30 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container-fluid">
     <div class="row justify-content-center">
-        <div class="col-md-10">
-
-          <a class="btn btn-primary" href="{{ route('register') }}">{{ __('Register') }}</a>
+        <div class="col-md-10">          
 
             <div class="card mt-3">
 
-                <div class="card-header">Vendors</div>
+                <div class="card-header">
+
+
+                  <div style="display: flex; justify-content: space-between; align-items: center;">
+
+                    <span id="card_title">
+                      Vendors
+                    </span>
+
+                     <div class="float-right">
+                      <a class="btn btn-primary btn-sm" href="{{ route('users.create') }}">Create New</a>
+                        </a>
+                      </div>
+                </div>
+
+
+
+                </div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -59,7 +74,7 @@
                         </tbody>
                       </table>  
 
-                      {{ $users->links() }}
+                      {{ $users->links('pagination::bootstrap-5') }}
                     
                 </div>
             </div>
