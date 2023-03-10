@@ -6,8 +6,8 @@ use App\Models\User;
 use App\Models\Order;
 use Livewire\Component;
 use App\Models\Customer;
+use App\Models\Ordersdetail;
 use Illuminate\Support\Facades\Auth;
-use Ramsey\Uuid\Codec\OrderedTimeCodec;
 
 class CheckOut extends Component
 {
@@ -31,6 +31,16 @@ class CheckOut extends Component
     public $errores='';
 
     public $comments='';
+
+    public $status='';
+
+    public $general='';
+
+    public $lastId;
+
+    public $orderDate;
+
+    public $total=0;
 
 
     protected $rules = [
@@ -70,17 +80,28 @@ class CheckOut extends Component
 
         }else{
 
+            $this->errores ='';
+            
             $user= User::find(Auth::id());
 
-            /* foreach (session('carrito') as $key => $value) {
-                # code...
-            } */
+            
+
+            if (session()->has('carrito')) {
+
+                    foreach (session('carrito') as $key => $item) {
+
+                        $total = $this->total + $item['finalprice'] * $item['amount'];                    
+                    }
+               
+            }
+
+            $this->total= $total;
 
             $order= New Order();
             
             $order->customer_id= $this->Customer->id;
             $order->user_id = Auth::id();
-            $order->total=0;
+            $order->total= $total;
             $order->date1= $user->date1;
             $order->date2= $user->date2;
             $order->date3= $user->date3;
@@ -88,6 +109,60 @@ class CheckOut extends Component
 
             $order->save();
 
+            $this->lastId= $order->id;
+
+            $this->orderDate= $order->created_at;
+
+            //$carrito = session('carrito');
+
+            //dd($carrito);
+            
+           
+            if (session()->has('carrito')) {
+
+                foreach (session('carrito') as $key => $item) {
+
+                    if (empty($item['notes'])) {
+                        
+                        $item['notes']=0;
+                    }  
+                    
+                    if (empty($item['qtytwo'])) {
+                        
+                        $item['qtytwo']=0;
+                    }    
+
+                    if (empty($item['notes'])) {
+                        
+                        $item['qtythree']=0;
+                    }  
+                    
+                    $ordersdetail = New Ordersdetail();           
+
+                    $ordersdetail->order_id = $this->lastId;
+                    $ordersdetail->product_id =  $item['id'];
+                    $ordersdetail->amount =  $item['amount'];
+                    $ordersdetail->notes =  $item['notes'];
+                    $ordersdetail->finalprice =$item['finalprice'];
+                    $ordersdetail->qtyone = $item['qtyone'];
+                    $ordersdetail->qtytwo = $item['qtytwo'];
+                    $ordersdetail->qtythree = $item['qtythree'];
+        
+                    $ordersdetail->save();
+
+
+                }               
+           
+             }
+
+             session()->forget('carrito');
+
+             $this->general= 1; // para ocultar los demas campos y dejar solo el reporte
+                                // de orden creada
+
+             //$this->reset();
+
+             $this->status = 'Order Created Successfully';
         }
         
 

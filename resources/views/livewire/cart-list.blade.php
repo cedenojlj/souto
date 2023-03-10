@@ -60,5 +60,30 @@
         
       </table>
 
-      <h5>Total $: {{ round($total,2)}}</h5>
+      
+
+      @if ($total>0)
+
+        <div class="container">
+
+            <div class="row mt-2">
+                <div class="col">
+
+                    <h5>Total $: {{ round($total,2)}}</h5>
+
+                </div>
+            </div>
+
+            <div class="row mt-2">
+                <div class="col">
+
+                    <a class="btn btn-primary" href="{{route('checkout')}}">Checkout</a>
+
+                </div>
+            </div>
+
+        </div>
+          
+      @endif
+      
 </div>

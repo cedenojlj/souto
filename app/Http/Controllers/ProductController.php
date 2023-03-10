@@ -89,7 +89,9 @@ class ProductController extends Controller
         
         $product = Product::find($request->input('product_id'));
 
-        $finalprice = $product->price - $request->input('notes');
+        $notes = !empty($request->input('notes')) ? $request->input('notes') : 0;
+
+        $finalprice = $product->price -  $notes;
 
         $item = [
 
@@ -99,10 +101,10 @@ class ProductController extends Controller
                 'name'=>$product->name,
                 'price'=>$product->price,
                 'amount' => $request->input('amount'),
-                'notes' => $request->input('notes'),
+                'notes' => !empty($request->input('notes')) ? $request->input('notes') : 0,
                 'qtyone' => $request->input('qtyone'),
-                'qtytwo' => $request->input('qtytwo'),
-                'qtythree' => $request->input('qtythree'),                
+                'qtytwo' => !empty($request->input('qtytwo')) ? $request->input('qtytwo') : 0,
+                'qtythree' => !empty($request->input('qtythree')) ? $request->input('qtythree') : 0,                
                 'finalprice' => $finalprice,
 
             ]
@@ -111,8 +113,8 @@ class ProductController extends Controller
 
         $amount= $request->input('amount');
         $qtyone= $request->input('qtyone');
-        $qtytwo= $request->input('qtytwo');
-        $qtythree= $request->input('qtythree');
+        $qtytwo= !empty($request->input('qtytwo')) ? $request->input('qtytwo') : 0;
+        $qtythree= !empty($request->input('qtythree')) ? $request->input('qtythree') : 0;
 
         $sumacantidad = $qtyone + $qtytwo + $qtythree;       
 
@@ -152,10 +154,10 @@ class ProductController extends Controller
                     'name'=>$product->name,
                     'price'=>$product->price,
                     'amount' => $request->input('amount'),
-                    'notes' => $request->input('notes'),
+                    'notes' => !empty($request->input('notes')) ? $request->input('notes') : 0,
                     'qtyone' => $request->input('qtyone'),
-                    'qtytwo' => $request->input('qtytwo'),
-                    'qtythree' => $request->input('qtythree'),                    
+                    'qtytwo' => !empty($request->input('qtytwo')) ? $request->input('qtytwo') : 0,
+                    'qtythree' => !empty($request->input('qtythree')) ? $request->input('qtythree') : 0 ,                
                     'finalprice' => $finalprice,
                 ];
 
@@ -211,14 +213,16 @@ class ProductController extends Controller
 
         ]);
         
-        $product = Product::find($request->input('product_id'));
+        $product = Product::find($request->input('product_id'));       
+        
+        $notes = !empty($request->input('notes')) ? $request->input('notes') : 0;
 
-        $finalprice = $product->price - $request->input('notes');        
+        $finalprice = $product->price -  $notes;
 
         $amount= $request->input('amount');
         $qtyone= $request->input('qtyone');
-        $qtytwo= $request->input('qtytwo');
-        $qtythree= $request->input('qtythree');
+        $qtytwo= !empty($request->input('qtytwo')) ? $request->input('qtytwo') : 0;
+        $qtythree= !empty($request->input('qtythree')) ? $request->input('qtythree') : 0;
 
         $sumacantidad = $qtyone + $qtytwo + $qtythree;       
 
@@ -245,10 +249,10 @@ class ProductController extends Controller
                     $carrito[$product->id]['name'] = $product->name;
                     $carrito[$product->id]['price'] = $product->price;
                     $carrito[$product->id]['amount'] =  $request->input('amount');
-                    $carrito[$product->id]['notes'] =  $request->input('notes');
-                    $carrito[$product->id]['qtyone'] =  $request->input('qtyone');
-                    $carrito[$product->id]['qtytwo'] =  $request->input('qtytwo');
-                    $carrito[$product->id]['qtythree'] =  $request->input('qtythree');                    
+                    $carrito[$product->id]['notes'] =  $notes;
+                    $carrito[$product->id]['qtyone'] =  $qtyone;
+                    $carrito[$product->id]['qtytwo'] =  $qtytwo;
+                    $carrito[$product->id]['qtythree'] =  $qtythree;                    
                     $carrito[$product->id]['finalprice'] =  $finalprice; 
 
                     $request->session()->put('carrito', $carrito);
