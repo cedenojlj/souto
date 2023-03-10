@@ -12,13 +12,7 @@
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
                         </div>
-                    @endif
-
-                    @if (session('errores'))
-                    <div class="alert alert-danger" role="alert">
-                        {{ session('errores') }}
-                    </div>
-                @endif
+                    @endif                  
 
                     
                     <livewire:check-out />

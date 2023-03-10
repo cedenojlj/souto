@@ -36,9 +36,9 @@ class UserSeeder extends Seeder
             'name' => 'pepe',
             'email' => 'pepe@gmail.com',
             'password' => Hash::make(12345678),
-            'date1'=>'2023-02-23',
-            'date2'=>'2023-02-24',
-            'date3'=>'2023-02-25',            
+            'date1'=>'2023-05-10',
+            'date2'=>'2023-06-05',
+            'date3'=>'2023-07-08',            
         ]);
 
     }

@@ -1,5 +1,14 @@
 <div>
 
+    @if ($errores)
+
+        <div class="alert alert-danger" role="alert">
+
+            {{ $errores }}
+
+        </div>
+        
+    @endif
 
     <div class="Container">
 
@@ -123,6 +132,19 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
+                    </div>
+                </div>
+
+                {{-- comments  --}}
+                
+                <div class="row mb-3">                
+        
+                    <div class="col-md-6">
+        
+                        <label for="comments" class="col-form-label text-md-end">Comments</label>  
+                         
+                        <textarea wire:model="comments" class="form-control" name="comments" id="comments" rows="3"></textarea>  
+
                     </div>
                 </div>
 

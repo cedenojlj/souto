@@ -22,7 +22,12 @@ class DatabaseSeeder extends Seeder
 
         //Product::factory(50)->create();
 
-        $this->call(UserSeeder::class);
+        $this->call([
+
+            UserSeeder::class,
+            CustomerSeeder::class,        
+        ]);
+        
         Product::factory()->count(50)->create();
         
 

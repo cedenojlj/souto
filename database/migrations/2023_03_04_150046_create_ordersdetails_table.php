@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('ordersdetails', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('order_id')->constrained('orders')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('product_id')->constrained('products')->onUpdate('cascade')->onDelete('cascade');
             $table->integer('amount')->default(0);
             $table->float('notes', 8, 2)->default(0);
