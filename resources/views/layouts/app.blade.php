@@ -60,6 +60,10 @@
                         @else
                             
                         <li class="nav-item">
+                            <a class="nav-link" href="{{ route('home') }}"> Home</a>
+                        </li>
+                        
+                        <li class="nav-item">
                             <a class="nav-link" href="{{ route('users.index') }}"> Vendors</a>
                         </li>
 
@@ -69,6 +73,10 @@
 
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('products.index') }}"> Products</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('cartlist') }}"> Cart</a>
                         </li>
 
                             <li class="nav-item dropdown">

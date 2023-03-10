@@ -20,8 +20,7 @@ class UserSeeder extends Seeder
             'password' => Hash::make(12345678),
             'date1'=>'2023-02-23',
             'date2'=>'2023-02-24',
-            'date3'=>'2023-02-25',
-            'rol'=>'user'
+            'date3'=>'2023-02-25',            
         ]);
 
         DB::table('users')->insert([
@@ -30,8 +29,7 @@ class UserSeeder extends Seeder
             'password' => Hash::make(12345678),
             'date1'=>'2023-02-23',
             'date2'=>'2023-02-24',
-            'date3'=>'2023-02-25',
-            'rol'=>'user'
+            'date3'=>'2023-02-25',           
         ]);
 
         DB::table('users')->insert([
@@ -40,8 +38,7 @@ class UserSeeder extends Seeder
             'password' => Hash::make(12345678),
             'date1'=>'2023-02-23',
             'date2'=>'2023-02-24',
-            'date3'=>'2023-02-25',
-            'rol'=>'user'
+            'date3'=>'2023-02-25',            
         ]);
 
     }

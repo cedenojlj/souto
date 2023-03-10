@@ -5,7 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CustomerController;
-use App\Models\Product;
+use App\Http\Livewire\CheckOut;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -44,3 +45,12 @@ Route::get('addtocart/{product}',[ ProductController::class,'addtoCart'])->name(
 
 Route::post('/addtocart',[ ProductController::class,'savetocart'])->name('savetocart');
 
+Route::get('/cartlist',[ ProductController::class,'cartlist'])->name('cartlist');
+
+Route::delete('cartdestroy',[ ProductController::class,'cartdestroy'])->name('cartdestroy');
+
+Route::put('updatecart',[ ProductController::class,'updatecart'])->name('updatecart');
+
+Route::get('cartedit/{product}',[ ProductController::class,'cartedit'])->name('cart.edit');
+
+Route::get('/checkout', [ ProductController::class,'checkout'])->name('checkout');

@@ -25,7 +25,6 @@ class ProductController extends Controller
         $product = new Product();
         return view('product.create', compact('product'));
     }
-
     
     public function store(Request $request)
     {
@@ -36,7 +35,6 @@ class ProductController extends Controller
         return redirect()->route('products.index')
             ->with('success', 'Product created successfully.');
     }
-
     
     public function show($id)
     {
@@ -44,7 +42,6 @@ class ProductController extends Controller
 
         return view('product.show', compact('product'));
     }
-
     
     public function edit($id)
     {
@@ -53,8 +50,7 @@ class ProductController extends Controller
         return view('product.edit', compact('product'));
     }
 
-    
-     
+         
     public function update(Request $request, Product $product)
     {
         request()->validate(Product::$rules);
@@ -90,16 +86,7 @@ class ProductController extends Controller
             'qtyone' => 'required',
 
         ]);
-
-
-        //dd($request->all());        
-
-        //dd($request->collect());        
-
-        //dd($request->input('product_id'));
-
-        //dd($request->input('notes'));
-
+        
         $product = Product::find($request->input('product_id'));
 
         $finalprice = $product->price - $request->input('notes');
@@ -108,14 +95,14 @@ class ProductController extends Controller
 
             $request->input('product_id') => [
 
+                'id'=>$product->id,
+                'name'=>$product->name,
+                'price'=>$product->price,
                 'amount' => $request->input('amount'),
                 'notes' => $request->input('notes'),
                 'qtyone' => $request->input('qtyone'),
                 'qtytwo' => $request->input('qtytwo'),
-                'qtythree' => $request->input('qtythree'),
-                'date1' => $request->input('date1'),
-                'date2' => $request->input('date2'),
-                'date3' => $request->input('date3'),
+                'qtythree' => $request->input('qtythree'),                
                 'finalprice' => $finalprice,
 
             ]
@@ -127,9 +114,7 @@ class ProductController extends Controller
         $qtytwo= $request->input('qtytwo');
         $qtythree= $request->input('qtythree');
 
-        $sumacantidad = $qtyone + $qtytwo + $qtythree;
-
-        //dd('cantidad: '. $amount. ' suma: '.$sumacantidad);
+        $sumacantidad = $qtyone + $qtytwo + $qtythree;       
 
         $revisar = ($amount==$sumacantidad);      
        
@@ -145,19 +130,10 @@ class ProductController extends Controller
             the sum of the quantity One, two and three'); 
 
         }  
-
-        //$request->session()->forget('carrito');
-
-        //dump(session('carrito'));
-
+        
         $carrito = $request->session()->get('carrito');
 
-
-        if (!$request->session()->has('carrito')) {
-
-            //$request->session()->flush();
-
-            //$carrito= $request->session()->get('carrito');
+        if (!$request->session()->has('carrito')) {            
 
             $request->session()->put('carrito', $item);
 
@@ -172,14 +148,14 @@ class ProductController extends Controller
 
                 $carrito[$request->input('product_id')] = [
 
+                    'id'=>$product->id,
+                    'name'=>$product->name,
+                    'price'=>$product->price,
                     'amount' => $request->input('amount'),
                     'notes' => $request->input('notes'),
                     'qtyone' => $request->input('qtyone'),
                     'qtytwo' => $request->input('qtytwo'),
-                    'qtythree' => $request->input('qtythree'),
-                    'date1' => $request->input('date1'),
-                    'date2' => $request->input('date2'),
-                    'date3' => $request->input('date3'),
+                    'qtythree' => $request->input('qtythree'),                    
                     'finalprice' => $finalprice,
                 ];
 
@@ -187,17 +163,106 @@ class ProductController extends Controller
                 
             }
         }
-
-
-
-        //$request->session()->push('carrito', $item);
-
-        //dd($request->session()->get('carrito'));
-
-       // dump($request->session()->get('carrito'));
+       
 
         return redirect()->route('home')->with('status', 'Product added successfully');
+       
+    }
 
-        //return view('home');
+    public function cartlist()
+    {
+        return view('cartlist');
+    }
+
+    public function cartdestroy(Request $request)
+    {
+        
+        $carrito = session('carrito');        
+        
+        if (Arr::exists($carrito, $request->input('id'))) {  
+            
+            unset($carrito[$request->input('id')]);
+
+            session()->put('carrito', $carrito);
+
+            return redirect()->route('cartlist')
+            ->with('status', 'Product deleted successfully');
+
+        }
+
+       
+    }
+
+    public function cartedit($id)
+    {
+       $iditem=$id;
+
+        return view('addtocart.edit', compact('iditem'));
+    }
+
+    public function updatecart(Request $request)
+    {
+       
+       
+        $request->validate([
+
+            'amount'=>'required',
+            'qtyone' => 'required',
+
+        ]);
+        
+        $product = Product::find($request->input('product_id'));
+
+        $finalprice = $product->price - $request->input('notes');        
+
+        $amount= $request->input('amount');
+        $qtyone= $request->input('qtyone');
+        $qtytwo= $request->input('qtytwo');
+        $qtythree= $request->input('qtythree');
+
+        $sumacantidad = $qtyone + $qtytwo + $qtythree;       
+
+        $revisar = ($amount==$sumacantidad);      
+       
+
+       if ($revisar) {
+
+        //cantidades correctas                      
+                   
+        }else{
+
+            return redirect()->route('cart.edit', $request->input('product_id'))
+            ->with('errores', 'The quantity must be equal to 
+            the sum of the quantity One, two and three'); 
+
+        }  
+
+        $carrito = $request->session()->get('carrito');
+
+        if (Arr::exists($carrito, $request->input('product_id'))) {  
+            
+                    $carrito[$product->id]['id'] = $product->id;
+                    $carrito[$product->id]['name'] = $product->name;
+                    $carrito[$product->id]['price'] = $product->price;
+                    $carrito[$product->id]['amount'] =  $request->input('amount');
+                    $carrito[$product->id]['notes'] =  $request->input('notes');
+                    $carrito[$product->id]['qtyone'] =  $request->input('qtyone');
+                    $carrito[$product->id]['qtytwo'] =  $request->input('qtytwo');
+                    $carrito[$product->id]['qtythree'] =  $request->input('qtythree');                    
+                    $carrito[$product->id]['finalprice'] =  $finalprice; 
+
+                    $request->session()->put('carrito', $carrito);
+
+                    //dd($carrito[$product->id]);         
+
+                    return redirect()->route('cartlist')->with('status', 'Product Updated successfully');
+
+        }
+
+    }
+
+    public function checkout()
+    {
+        return view('checkout');
     }
 }

@@ -14,8 +14,15 @@
                         </div>
                     @endif
 
+                    @if (session('errores'))
+                    <div class="alert alert-danger" role="alert">
+                        {{ session('errores') }}
+                    </div>
+                @endif
+
                     
-                    <livewire:addto-cart :product="$product"/>
+                    <livewire:check-out />
+
                     
                 </div>
             </div>
