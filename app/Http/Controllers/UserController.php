@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Exports\UsersExport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UserController extends Controller
 {
@@ -122,6 +124,13 @@ class UserController extends Controller
         $user->delete();
 
         return redirect()->route('users.index')->with('success','Vendor has been deleted successfully.');
+    }
+
+
+    public function export()     {
+        
+        //dd('estoy dentro del excel');
+       return Excel::download(new UsersExport, 'users.xlsx');
     }
 
     

@@ -62,7 +62,10 @@ Route::get('/checkout', [ ProductController::class,'checkout'])->name('checkout'
 
 Route::get('sendmail', [MailController::class,'index']);
 
-//probando subida de archivos y descargas
+
+//****************************************** */
+
+//probando subida de archivos y descargas 
 
 Route::view('/actualizando', 'actualizando');
 
@@ -85,5 +88,7 @@ Route::post('/actualizandoarchivo', function (Request $request) {
     
 })->name('actualizandoarchivo');
 
-//
+//******************************************* */
+
+Route::get('/export-user', [UserController::class, 'export']);
 
