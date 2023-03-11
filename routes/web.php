@@ -1,11 +1,14 @@
 <?php
 
+use Illuminate\Http\Request;
+use App\Http\Livewire\CheckOut;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CustomerController;
-use App\Http\Livewire\CheckOut;
 
 
 /*
@@ -54,3 +57,33 @@ Route::put('updatecart',[ ProductController::class,'updatecart'])->name('updatec
 Route::get('cartedit/{product}',[ ProductController::class,'cartedit'])->name('cart.edit');
 
 Route::get('/checkout', [ ProductController::class,'checkout'])->name('checkout');
+
+//ensayos
+
+Route::get('sendmail', [MailController::class,'index']);
+
+//probando subida de archivos y descargas
+
+Route::view('/actualizando', 'actualizando');
+
+Route::post('/actualizandoarchivo', function (Request $request) {
+
+   //$filetests = $request->file('filetest')->store('public');
+
+  $miarchivo = $request->file('filetest');
+
+  $nombre = "000". $miarchivo->getClientOriginalName();
+
+  $filetests= Storage::putFileAs('public', $request->file('filetest'), $nombre);  
+   
+
+    //return Storage::download('public/000SENIAT.jpg', $nombre);
+
+    return Storage::download('public/'.$nombre, $nombre);
+    
+    //dd('todo listo');
+    
+})->name('actualizandoarchivo');
+
+//
+
