@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Order;
+use App\Models\Customer;
 use App\Exports\OrderExport;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 
 class OrderController extends Controller
@@ -14,7 +17,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        return Order::find(12)->ordersdetails;
+        return view('orderlist');
     }
 
     /**
@@ -67,7 +70,17 @@ class OrderController extends Controller
 
     public function export($id) {
 
-    return Excel::download(new OrderExport($id), 'order.xlsx');
+      $order= Order::find($id);
+      $customer= Customer::find($order->customer_id);
+      $nameCustomer= $customer->name;
+
+      $user=User::find(Auth::id());
+      $nameUser= $user->name;     
+
+      $nameFile= $nameUser."-".$nameCustomer."-".$id.".xlsx";
+
+      return Excel::download(new OrderExport($id), $nameFile);
 
     }
 }
+

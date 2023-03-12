@@ -76,6 +76,10 @@
                         </li>
 
                         <li class="nav-item">
+                            <a class="nav-link" href="{{ route('orders') }}"> Order</a>
+                        </li>
+
+                        <li class="nav-item">
                             <a class="nav-link" href="{{ route('cartlist') }}"> Cart</a>
                         </li>
 

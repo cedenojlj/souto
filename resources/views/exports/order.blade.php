@@ -8,12 +8,12 @@
     <thead>
     <tr>        
         <th>Qty</th>
-        <th>Description</th>
-        <th>notes</th>
+        <th>Description</th>       
 
         <th>Scan Item UPC</th>
         <th>Cases per Pallet</th>
         <th>Food Show Deal</th>
+        <th>notes</th>
 
         <th>finalprice</th>
         <th>{{$orden->date1}}</th>
@@ -26,12 +26,12 @@
         <tr>
             
             <td>{{ $order->amount }}</td>
-            <td>{{ $order->name }}</td>
-            <td>{{ $order->notes }}</td>
+            <td>{{ $order->name }}</td>            
 
             <td>{{ $order->upc }}</td>
             <td>{{ $order->pallet }}</td>
             <td>{{ $order->price }}</td>
+            <td>{{ $order->notes }}</td>
 
             <td>{{ $order->finalprice }}</td>
             <td>{{ $order->qtyone }}</td>

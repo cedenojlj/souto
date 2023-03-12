@@ -102,7 +102,7 @@ Route::get('/export-user', [UserController::class, 'export']);
 
 //********************/
 
-Route::get('order', [OrderController::class,'index']);
+Route::get('orders', [OrderController::class,'index'])->name('orders');
 
 //***************** para exportar la orden en excel */
 
