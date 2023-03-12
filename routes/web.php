@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CustomerController;
 
@@ -90,5 +91,16 @@ Route::post('/actualizandoarchivo', function (Request $request) {
 
 //******************************************* */
 
+
+
+/**** exportando a excel ******** */
+
 Route::get('/export-user', [UserController::class, 'export']);
+
+/*********************************************** */
+
+
+//********************/
+
+Route::get('order', [OrderController::class,'index']);
 

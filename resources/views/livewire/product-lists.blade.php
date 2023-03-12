@@ -23,10 +23,27 @@
 
                 <div class="card mb-3">
                     <div class="card-body">
-                      <h5 class="card-title">{{ $product->name }}</h5>
-                      <p class="card-text">{{ $product->description }}</p>
-                      <h6 class="card-subtitle mb-2 text-muted">Price:{{ $product->price }}</h6>
-                      <a href="{{route('addtocart', ['product'=> $product])}}" class="btn btn-primary">Add to cart</a>
+
+
+                        <div class="row">
+                            <div class="col">
+                                <h6 class="card-title">{{ $product->name }}</h6>                                
+                            </div>
+
+                            <div class="col">                                
+                                <p class="card-text">{{ $product->description }}</p>
+                            </div>
+
+                            <div class="col">
+                                <h6 class="card-subtitle text-muted">Price:{{ $product->price }}</h6>
+                            </div>
+                            <div class="col">
+                                <a href="{{route('addtocart', ['product'=> $product])}}" class="btn btn-primary">Add to cart</a>
+                            </div>
+                        </div>
+                      
+                      
+                     
                     </div>
                   </div>
 
@@ -38,3 +55,5 @@
     </ul>
 
 </div>
+
+

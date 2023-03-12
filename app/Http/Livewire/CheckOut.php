@@ -97,6 +97,11 @@ class CheckOut extends Component
 
             $this->total= $total;
 
+            if (!$this->rebate) {
+                
+                $this->rebate=0;
+            }
+
             $order= New Order();
             
             $order->customer_id= $this->Customer->id;
@@ -106,6 +111,10 @@ class CheckOut extends Component
             $order->date2= $user->date2;
             $order->date3= $user->date3;
             $order->comments= $this->comments;
+            $order->customerEmail= $this->email;
+            $order->rebate= $this->rebate;
+            $order->rebateEmail= $this->rebateEmail;
+
 
             $order->save();
 
@@ -141,6 +150,7 @@ class CheckOut extends Component
 
                     $ordersdetail->order_id = $this->lastId;
                     $ordersdetail->product_id =  $item['id'];
+                    $ordersdetail->name =  $item['name'];
                     $ordersdetail->amount =  $item['amount'];
                     $ordersdetail->notes =  $item['notes'];
                     $ordersdetail->finalprice =$item['finalprice'];

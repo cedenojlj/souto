@@ -27,7 +27,7 @@ class ProductFactory extends Factory
             //
             'itemnumber' => fake()->swiftBicNumber(),
 		'name' => fake()->name(),
-		'description' => fake()->text($maxNbChars = 200),  
+		'description' => fake()->text($maxNbChars = 50),  
 		'upc' => fake()->swiftBicNumber(),
 		'pallet' => fake()->numberBetween($min = 1, $max = 50),
 		'price' => fake()->randomFloat($nbMaxDecimals = 2, $min = 1, $max = 20), // 48.8932,

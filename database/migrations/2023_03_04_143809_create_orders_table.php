@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('orders', function (Blueprint $table) {
+
             $table->id();
             $table->foreignId('customer_id')->constrained('customers')->onUpdate('cascade')->onDelete('cascade');
             $table->unsignedBigInteger('user_id');
@@ -20,7 +21,11 @@ return new class extends Migration
             $table->date('date2');
             $table->date('date3');   
             $table->text('comments');
+            $table->string('customerEmail');
+            $table->float('rebate', 14, 2)->nullable();
+            $table->string('rebateEmail')->nullable();
             $table->timestamps();
+            
         });
     }
 

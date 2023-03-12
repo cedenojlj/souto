@@ -12,7 +12,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        return Order::find(12)->ordersdetails;
     }
 
     /**

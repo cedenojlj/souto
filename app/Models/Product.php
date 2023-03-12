@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
@@ -56,5 +57,9 @@ class Product extends Model
         return $this->hasOne('App\Models\User', 'id', 'user_id');
     }
     
+    public function ordersdetails(): HasMany
+    {
+        return $this->hasMany(Ordersdetail::class);
+    }
 
 }

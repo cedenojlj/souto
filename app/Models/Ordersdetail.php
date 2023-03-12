@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Ordersdetail extends Model
 {
@@ -12,4 +13,14 @@ class Ordersdetail extends Model
     protected $fillable = ['order_id','product_id','amount','notes','finalprice','qtyone','qtytwo','qtythree'];
 
     protected $table = 'ordersdetails';
+
+    public function order(): BelongsTo
+    {
+        return $this->belongsTo(Order::class);
+    }
+
+    public function product(): BelongsTo
+    {
+        return $this->belongsTo(Product::class);
+    }
 }
