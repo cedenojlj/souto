@@ -10,7 +10,12 @@ class Order extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['customer_id','user_id','total','date1','date2','date3','comments'];
+    protected $fillable = ['customer_id',
+    'user_id','total','date1',
+    'date2','date3','comments',
+    'customerEmail','rebate','rebateEmail'
+    
+    ];
 
     protected $table = 'orders';
 

@@ -7,6 +7,7 @@ use App\Models\Order;
 use Livewire\Component;
 use App\Models\Customer;
 use App\Models\Ordersdetail;
+use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 
 class CheckOut extends Component
@@ -145,12 +146,19 @@ class CheckOut extends Component
                         
                         $item['qtythree']=0;
                     }  
+
+                    $producto= Product::find($item['id']);
                     
                     $ordersdetail = New Ordersdetail();           
 
                     $ordersdetail->order_id = $this->lastId;
                     $ordersdetail->product_id =  $item['id'];
                     $ordersdetail->name =  $item['name'];
+
+                    $ordersdetail->upc =  $producto->upc;
+                    $ordersdetail->pallet =  $producto->pallet;
+                    $ordersdetail->price =  $producto->price;
+
                     $ordersdetail->amount =  $item['amount'];
                     $ordersdetail->notes =  $item['notes'];
                     $ordersdetail->finalprice =$item['finalprice'];
