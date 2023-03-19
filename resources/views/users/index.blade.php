@@ -16,10 +16,10 @@
                       Vendors
                     </span>
 
-                     <div class="float-right">
+                     {{-- <div class="float-right">
                       <a class="btn btn-primary btn-sm" href="{{ route('users.create') }}">Create New</a>
                         </a>
-                      </div>
+                      </div> --}}
                 </div>
 
 
@@ -40,7 +40,7 @@
                           <tr>
                             <th scope="col">#</th>
                             <th scope="col">Name</th>
-                            <th scope="col">Emal</th>
+                            <th scope="col">Username</th>
                             <th scope="col">Actions</th>
                           </tr>
                         </thead>
@@ -60,7 +60,7 @@
                                   @csrf
                                   @method('DELETE')
 
-                                  <button type="submit" class="btn btn-danger">Delete</button>
+                                  {{-- <button type="submit" class="btn btn-danger">Delete</button> --}}
                                   
                                 </form>
 
@@ -74,7 +74,7 @@
                         </tbody>
                       </table>  
 
-                      {{ $users->links('pagination::bootstrap-5') }}
+                      {{ $users->links() }}
                     
                 </div>
             </div>

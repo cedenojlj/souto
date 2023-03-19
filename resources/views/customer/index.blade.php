@@ -13,14 +13,14 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Customer') }}
+                                {{ __('Customers') }}
                             </span>
 
-                             <div class="float-right">
+                            {{--  <div class="float-right">
                                 <a href="{{ route('customers.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
                                   {{ __('Create New') }}
-                                </a>
-                              </div>
+                                </a> 
+                              </div> --}}
                         </div>
                     </div>
                     @if ($message = Session::get('success'))
@@ -38,7 +38,7 @@
                                         
 										<th>Name</th>
 										<th>Email</th>
-										<th>Pin</th>
+										<th>Email</th>
 
                                         <th></th>
                                     </tr>
@@ -50,15 +50,15 @@
                                             
 											<td>{{ $customer->name }}</td>
 											<td>{{ $customer->email }}</td>
-											<td>{{ $customer->pin }}</td>
+											<td>{{ $customer->email2 }}</td>
 
                                             <td>
                                                 <form action="{{ route('customers.destroy',$customer->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('customers.show',$customer->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
+                                                    {{-- <a class="btn btn-sm btn-primary " href="{{ route('customers.show',$customer->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a> --}}
                                                     <a class="btn btn-sm btn-success" href="{{ route('customers.edit',$customer->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Delete</button>
+                                                    {{-- <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Delete</button> --}}
                                                 </form>
                                             </td>
                                         </tr>
@@ -68,7 +68,8 @@
                         </div>
                     </div>
                 </div>
-                {!! $customers->links() !!}
+                {{-- {{$customers->links('pagination::bootstrap-5')}} --}}
+                {{$customers->links()}}
             </div>
         </div>
     </div>

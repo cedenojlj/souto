@@ -11,17 +11,28 @@ class ProductLists extends Component
 {
 
     use WithPagination;
+
+    protected $paginationTheme = 'bootstrap';
+
     public $search='';
     
-    public function updatingSearch()
+    /* public function updatingSearch()
     {
+        
+        
         $this->resetPage();
-    }
+    } */
+
+    /* public function updated()
+    {
+                
+        $this->resetPage();
+    } */
 
     public function render()
     {
         return view('livewire.product-lists', [
-            'productos'=>Product::where('name','LIKE','%'.$this->search.'%')->where('user_id',Auth::id())->paginate(15),
+            'productos'=>Product::where('name','LIKE','%'.$this->search.'%')->where('user_id',Auth::id())->paginate(25),
         ]);
     }
 }

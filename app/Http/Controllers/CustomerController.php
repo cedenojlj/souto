@@ -18,7 +18,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $customers = Customer::paginate();
+        $customers = Customer::paginate(25);
 
         return view('customer.index', compact('customers'))
             ->with('i', (request()->input('page', 1) - 1) * $customers->perPage());
@@ -86,9 +86,40 @@ class CustomerController extends Controller
      */
     public function update(Request $request, Customer $customer)
     {
-        request()->validate(Customer::$rules);
+        //dd($request);
+        
+        //request()->validate(Customer::$rules);
 
-        $customer->update($request->all());
+        $request->validate([
+
+            'name' => ['required', 'string', 'max:255'],            
+            'email' => ['required'],
+            'email2' => ['required'],
+            'emailRep' => ['required'],   
+        ]);
+
+
+        if (empty($request->pin)) {
+            
+            $clave= $customer->pin;
+
+        } else {
+            
+            $clave= $request->pin;
+           
+        }
+        
+
+        //$customer->update($request->all());        
+
+        $customer->name = $request->name;
+        $customer->email = $request->email;
+        $customer->email2 = $request->email2;
+        $customer->emailRep = $request->emailRep;
+        $customer->pin =  $clave;
+
+        $customer->save();
+
 
         return redirect()->route('customers.index')
             ->with('success', 'Customer updated successfully');

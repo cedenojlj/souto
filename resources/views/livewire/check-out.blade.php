@@ -76,9 +76,9 @@
             
                         <div class="col-md-6">
             
-                            <label for="email" class="col-form-label text-md-end">Email</label>
+                            <label for="email" class="col-form-label text-md-end">Email Customer</label>
                             
-                            <input wire:model="email" id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required>
+                            <input wire:model="email" id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" required>
             
                             @error('email')
                                 <span class="invalid-feedback" role="alert">
@@ -87,7 +87,62 @@
                             @enderror
                         </div>
                     </div>
+
+                    {{-- email customer segundo  --}}
+
+                    <div class="row mb-3">                
             
+                        <div class="col-md-6">
+            
+                            <label for="email2" class="col-form-label text-md-end">Email Customer</label>
+                            
+                            <input wire:model="email2" id="email2" type="email2" class="form-control @error('email2') is-invalid @enderror" name="email2" required>
+            
+                            @error('email2')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    {{-- Sales Rep  email--}}
+
+                    <div class="row mb-3">                
+            
+                        <div class="col-md-6">
+            
+                            <label for="emailRep" class="col-form-label text-md-end">Sales Rep</label>
+                            
+                            <input wire:model="emailRep" id="emailRep" type="emailRep" class="form-control @error('emailRep') is-invalid @enderror" name="emailRep" required>
+            
+                            @error('emailRep')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+            
+                     {{-- email vendor  --}}
+
+                     <div class="row mb-3">                
+            
+                        <div class="col-md-6">
+            
+                            <label for="vendorEmail" class="col-form-label text-md-end">Email Vendor</label>
+                            
+                            <input wire:model="vendorEmail" id="vendorEmail" type="vendorEmail" class="form-control @error('vendorEmail') is-invalid @enderror" name="vendorEmail" required>
+            
+                            @error('vendorEmail')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                                           
+                    
                     {{-- pin customer  --}}
 
                     <div class="row mb-3">                
@@ -122,25 +177,7 @@
                                 </span>
                             @enderror
                         </div>
-                    </div> 
-
-                    {{-- email rebate  --}}
-                    
-                    <div class="row mb-3">                
-            
-                        <div class="col-md-6">
-            
-                            <label for="rebateEmail" class="col-form-label text-md-end">Rebate Email</label>
-                            
-                            <input wire:model="rebateEmail" id="rebateEmail" type="email" class="form-control @error('rebateEmail') is-invalid @enderror" name="rebateEmail" value="{{ old('rebateEmail') }}">
-            
-                            @error('rebateEmail')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
+                    </div>                    
 
                     {{-- comments  --}}
                     

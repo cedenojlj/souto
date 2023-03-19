@@ -3,9 +3,9 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-10">
+        <div class="col-md-12">
             <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+                <div class="card-header">{{ __('Home') }}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -17,9 +17,10 @@
                     @if (session('errores'))
                     <div class="alert alert-danger" role="alert">
                         {{ session('errores') }}
-                    </div>
+                    </div>                    
                 @endif
-
+                
+                <h5>{{Auth::user()->name}}</h5>
                     
 
                     <livewire:product-lists />

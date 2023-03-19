@@ -11,6 +11,7 @@ class OrderList extends Component
 {
 
     use WithPagination;
+    protected $paginationTheme = 'bootstrap';
     public $search='';
     
     public function updatingSearch()
@@ -21,7 +22,7 @@ class OrderList extends Component
     public function render()
     {
         return view('livewire.order-list',[
-            'orders'=>Order::where('id','LIKE','%'.$this->search.'%')->where('user_id',Auth::id())->paginate(15),
+            'orders'=>Order::where('id','LIKE','%'.$this->search.'%')->where('user_id',Auth::id())->paginate(25),
         ]);
     }
 }

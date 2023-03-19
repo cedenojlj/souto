@@ -4,6 +4,7 @@ namespace App\Exports;
 
 use App\Models\Customer;
 use App\Models\Order;
+use Carbon\Carbon;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
@@ -20,6 +21,8 @@ class OrderExport implements FromView, ShouldAutoSize
     public function view(): View
     {
         $orden= Order::find($this->id);
+        $orderDate= $orden->created_at->format('mdyhis');
+        
         
         $customer= Customer::find($orden->customer_id);
 
@@ -27,7 +30,8 @@ class OrderExport implements FromView, ShouldAutoSize
 
             'orders' => Order::find($this->id)->ordersdetails,
             'orden'=>$orden,
-            'customer'=>$customer
+            'customer'=>$customer,
+            'orderDate'=>$orderDate
 
         ]);
     }

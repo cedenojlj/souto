@@ -37,7 +37,7 @@
 
                               <tr>
                                 <th scope="row">{{ $order->id }}</th>
-                                <td>{{ $order->created_at }}</td>
+                                <td>{{ $order->created_at->format('mdyhis') }}</td>
                                 <td>{{ $order->total }}</td>
                                 <td>
                                     <a href="{{url('export-order',[$order->id])}}" class="btn btn-primary">Download</a>
@@ -55,7 +55,7 @@
 
         
 
-        {{ $orders->links('pagination::bootstrap-5') }}
+        {{ $orders->links() }}
     
 
 

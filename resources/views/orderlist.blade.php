@@ -18,7 +18,9 @@
                     <div class="alert alert-danger" role="alert">
                         {{ session('errores') }}
                     </div>
-                @endif                    
+                @endif   
+                
+                <h5>{{Auth::user()->name}}</h5>
 
                 <livewire:order-list />       
                   

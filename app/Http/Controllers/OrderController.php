@@ -75,9 +75,10 @@ class OrderController extends Controller
       $nameCustomer= $customer->name;
 
       $user=User::find(Auth::id());
-      $nameUser= $user->name;     
+      $nameUser= $user->name; 
+      $orderDate= $order->created_at->format('mdyhis');   
 
-      $nameFile= $nameUser."-".$nameCustomer."-".$id.".xlsx";
+      $nameFile= $nameCustomer."-".$nameUser."-".$orderDate.".xlsx";
 
       return Excel::download(new OrderExport($id), $nameFile);
 

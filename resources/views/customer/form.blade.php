@@ -11,11 +11,36 @@
             {{ Form::text('email', $customer->email, ['class' => 'form-control' . ($errors->has('email') ? ' is-invalid' : ''), 'placeholder' => 'Email']) }}
             {!! $errors->first('email', '<div class="invalid-feedback">:message</div>') !!}
         </div>
+
+        <div class="form-group">
+            {{ Form::label('email2') }}
+            {{ Form::text('email2', $customer->email2, ['class' => 'form-control' . ($errors->has('email2') ? ' is-invalid' : ''), 'placeholder' => 'Email2']) }}
+            {!! $errors->first('email2', '<div class="invalid-feedback">:message</div>') !!}
+        </div>
+
+        <div class="form-group">
+            {{ Form::label('emailRep') }}
+            {{ Form::text('emailRep', $customer->emailRep, ['class' => 'form-control' . ($errors->has('emailRep') ? ' is-invalid' : ''), 'placeholder' => 'EmailRep']) }}
+            {!! $errors->first('emailRep', '<div class="invalid-feedback">:message</div>') !!}
+        </div>       
+
+        @if (Auth::user()->rol == 'admin')
+
         <div class="form-group">
             {{ Form::label('pin') }}
             {{ Form::text('pin', $customer->pin, ['class' => 'form-control' . ($errors->has('pin') ? ' is-invalid' : ''), 'placeholder' => 'Pin']) }}
             {!! $errors->first('pin', '<div class="invalid-feedback">:message</div>') !!}
-        </div>
+        </div>       
+            
+        @else
+            
+        <input type="hidden" name="pin" value="">
+            
+
+        @endif
+
+        
+       
 
     </div>
     <div class="box-footer mt20">

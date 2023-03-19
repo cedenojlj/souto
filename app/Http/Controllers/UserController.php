@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Exports\UsersExport;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -15,7 +16,17 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::paginate(4);
+
+        if (Auth::user()->rol == 'admin') {
+
+            $users = User::paginate(25);
+
+        } else {
+           
+            $users = User::where('id', Auth::id())->paginate(15);
+        }
+        
+       
 
         return view('users.index', compact('users'));
     }
@@ -35,31 +46,32 @@ class UserController extends Controller
     {
         $request->validate([
 
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'name' => ['required', 'string', 'max:255'],            
+            'email' => ['required'],
+            'emailuser' => ['required'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'date1' => ['required'],
             'date2' => ['required'],
-            'date3' => ['required'],
-            'rol' => ['required'],
+            'date3' => ['required'],            
         ]);
 
         //User::create($request->post());
 
         $user = new User;
 
-        $user->name = $request->name;
+        $user->name = $request->name;       
         $user->email = $request->email;
+        $user->emailuser = $request->emailuser;
         $user->password = Hash::make($request->password);
         $user->date1 = $request->date1;
         $user->date2 = $request->date2;
-        $user->date3 = $request->date3;
-        $user->rol = $request->rol;
+        $user->date3 = $request->date3; 
+        $user->rol = $request->rol;      
 
         $user->save();
 
 
-        return redirect()->route('users.index')->with('success','Vendor has been created successfully.');
+        return redirect()->route('users.index')->with('status','Vendor has been created successfully.');
 
     }
 
@@ -86,30 +98,31 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $request->validate([
+         $request->validate([
 
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'name' => ['required', 'string', 'max:255'],            
+            'email' => ['required'],
+            'emailuser' => ['required'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'date1' => ['required'],
             'date2' => ['required'],
-            'date3' => ['required'],
-            'rol' => ['required'],
+            'date3' => ['required'],            
         ]);
-
+ 
         $user= User::find($id);
 
-        $user->name = $request->name;
+        $user->name = $request->name;        
         $user->email = $request->email;
+        $user->emailuser = $request->emailuser;
         $user->password = Hash::make($request->password);
         $user->date1 = $request->date1;
         $user->date2 = $request->date2;
-        $user->date3 = $request->date3;
-        $user->rol = $request->rol;
+        $user->date3 = $request->date3; 
+        $user->rol = $request->rol;          
 
         $user->save();
 
-        return redirect()->route('users.index')->with('success','Vendor has been updated successfully.');
+        return redirect()->route('users.index')->with('status','Vendor has been updated successfully.');
 
 
     }
@@ -123,7 +136,7 @@ class UserController extends Controller
 
         $user->delete();
 
-        return redirect()->route('users.index')->with('success','Vendor has been deleted successfully.');
+        return redirect()->route('users.index')->with('status','Vendor has been deleted successfully.');
     }
 
 
@@ -135,3 +148,5 @@ class UserController extends Controller
 
     
 }
+
+

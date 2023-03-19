@@ -4,10 +4,11 @@ namespace App\Http\Livewire;
 
 use App\Models\User;
 use App\Models\Order;
+use App\Models\Product;
 use Livewire\Component;
 use App\Models\Customer;
+use Illuminate\Support\Str;
 use App\Models\Ordersdetail;
-use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 
 class CheckOut extends Component
@@ -21,7 +22,13 @@ class CheckOut extends Component
 
     public $Customer;
 
-    public $email;
+    public $email; // email del customer
+
+    public $email2; // segundo email del customer
+
+    public $emailRep; // email del representante de ventas
+
+    public $vendorEmail; // email del vendor
 
     public $pin;
 
@@ -48,8 +55,11 @@ class CheckOut extends Component
 
         'idCustomer' => 'required',
         'email' => 'required|email',
+        'email2' => 'required|email',
+        'emailRep' => 'required|email',
+        'vendorEmail' => 'required|email',
         'pin' => 'required',
-        'rebateEmail' => 'required_with:rebate'
+        
     ];
 
 
@@ -64,6 +74,15 @@ class CheckOut extends Component
         $this->Customer= Customer::find($this->idCustomer);
 
         $this->email = $this->Customer->email;
+
+        $this->email2 = $this->Customer->email2;
+
+        $this->emailRep = $this->Customer->emailRep;
+
+        $this->vendorEmail = Auth::user()->emailuser;
+
+
+
     }
 
 
@@ -113,9 +132,11 @@ class CheckOut extends Component
             $order->date3= $user->date3;
             $order->comments= $this->comments;
             $order->customerEmail= $this->email;
-            $order->rebate= $this->rebate;
-            $order->rebateEmail= $this->rebateEmail;
-
+            $order->customerEmail2= $this->email2;
+            $order->saleRepEmail= $this->email;
+            $order->vendorEmail= $this->vendorEmail;
+            $order->rebate= $this->rebate;  
+            $order->idRebate= Str::ulid();  
 
             $order->save();
 

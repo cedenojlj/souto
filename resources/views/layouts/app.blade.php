@@ -23,12 +23,14 @@
     @livewireStyles
 
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
 </head>
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
+                <img src="{{asset('img/logo1.jpg')}}" alt="" width="50" height="60">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'SoutoFoods') }}
                 </a>
@@ -52,35 +54,35 @@
                                 </li>
                             @endif
 
-                            @if (Route::has('register'))
+                            {{-- @if (Route::has('register'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
-                            @endif
+                            @endif --}}
                         @else
                             
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('home') }}"> Home</a>
+                            <a class="nav-link" href="{{ route('home') }}"> <i class="bi bi-house-door"></i> Home</a>
                         </li>
                         
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('users.index') }}"> Vendors</a>
+                            <a class="nav-link" href="{{ route('users.index') }}"><i class="bi bi-person"></i> Vendors</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('customers.index') }}"> Customers</a>
+                            <a class="nav-link" href="{{ route('customers.index') }}"> <i class="bi bi-person-check"></i> Customers</a>
+                        </li>
+
+                        {{-- <li class="nav-item">
+                            <a class="nav-link" href="{{ route('products.index') }}"> Items</a>
+                        </li> --}}
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('orders') }}"> <i class="bi bi-clipboard-data"></i> Order</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('products.index') }}"> Products</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('orders') }}"> Order</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('cartlist') }}"> Cart</a>
+                            <a class="nav-link" href="{{ route('cartlist') }}"><i class="bi bi-cart-check"></i> Cart</a>
                         </li>
 
                             <li class="nav-item dropdown">

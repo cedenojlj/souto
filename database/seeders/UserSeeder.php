@@ -16,30 +16,38 @@ class UserSeeder extends Seeder
     {
         DB::table('users')->insert([
             'name' => 'siproced',
-            'email' => 'siproced@gmail.com',
+            'emailuser' => 'siproced@gmail.com', //email user
+            'email' => 'siproced',               // username
             'password' => Hash::make(12345678),
             'date1'=>'2023-02-23',
             'date2'=>'2023-02-24',
-            'date3'=>'2023-02-25',            
+            'date3'=>'2023-02-25',
+            'rol'=>'admin'            
         ]);
 
         DB::table('users')->insert([
             'name' => 'juan',
-            'email' => 'juan@gmail.com',
+            'emailuser' => 'juan123@gmail.com', //email user
+            'email' => 'juan123',               // username
             'password' => Hash::make(12345678),
             'date1'=>'2023-02-23',
             'date2'=>'2023-02-24',
-            'date3'=>'2023-02-25',           
+            'date3'=>'2023-02-25',
+            'rol'=>'user'           
         ]);
 
         DB::table('users')->insert([
             'name' => 'pepe',
-            'email' => 'pepe@gmail.com',
+            'emailuser' => 'pepe123@gmail.com', //email user
+            'email' => 'pepe123',               // username
             'password' => Hash::make(12345678),
             'date1'=>'2023-05-10',
             'date2'=>'2023-06-05',
-            'date3'=>'2023-07-08',            
+            'date3'=>'2023-07-08',
+            'rol'=>'user'            
         ]);
 
     }
 }
+
+

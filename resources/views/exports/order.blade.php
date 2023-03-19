@@ -1,5 +1,5 @@
 
-
+<h4>Order Date: {{$orderDate}}</h4>
 <h4>Order Number: {{$orden->id}}</h4>
 <h4>Customer: {{$customer->name}}</h4>
 

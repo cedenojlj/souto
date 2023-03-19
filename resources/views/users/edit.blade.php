@@ -12,11 +12,11 @@
                         @csrf
                         @method('PUT')
 
-                        <div class="row mb-3">
+                       {{--  <div class="row mb-3">
                             <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $user->name }}" required autocomplete="name" autofocus>
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $user->name }}" required autocomplete="name" autofocus disabled>
 
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -24,13 +24,23 @@
                                     </span>
                                 @enderror
                             </div>
+                        </div> --}}
+
+                        <div class="row mb-3">
+                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
+
+                            <div class="col-md-6">
+                                <label class="form-control">{{ $user->name }}</label>
+                                <input type="hidden" name="name" value="{{ $user->name }}">
+                                
+                            </div>
                         </div>
 
                         <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Username') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $user->email }}" required autocomplete="email">
+                                <input id="email" type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $user->email }}" required autocomplete="email">
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -41,7 +51,23 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
+                            <label for="emailuser" class="col-md-4 col-form-label text-md-end">{{ __('Email') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="emailuser" type="text" class="form-control @error('emailuser') is-invalid @enderror" name="emailuser" value="{{ $user->emailuser }}" required autocomplete="emailuser">
+
+                                @error('emailuser')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        
+
+                        <div class="row ">
+                            {{-- <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
@@ -51,15 +77,20 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                            </div>
+                            </div> --}}
+
+                            <input type="hidden" name="password" value="12345678">
                         </div>
 
-                        <div class="row mb-3">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
+                        <div class="row ">
+
+                            {{-- <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
+                            </div> --}}
+
+                            <input type="hidden" name="password_confirmation" value="12345678">
                         </div>
 
                         <div class="row mb-3">
@@ -86,12 +117,34 @@
                             </div>
                         </div>
 
+                        <div class="row mb-3">                         
+
+                            <input type="hidden" name="rol" value="{{ Auth::user()->rol}}">
+                        </div>
                         
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
-                                </button>
+
+                                @if (Auth::user()->rol == 'admin')
+
+                                    <button type="submit" class="btn btn-primary">
+                                        {{ __('Register') }}
+                                    </button>
+                                    
+                                @else
+                                    
+                                <a class="btn btn-primary" href="{{ route('home') }}">Back</a>
+                            </a>
+                                    
+                                    
+                                @endif
+
+                                
+
+
+                               
+
+
                             </div>
                         </div>
                     </form>

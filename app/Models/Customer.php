@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * Class Customer
@@ -19,21 +20,28 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Customer extends Model
 {
-    
+    use HasFactory;
+
+
     static $rules = [
 		'name' => 'required',
 		'email' => 'required',
 		'pin' => 'required',
     ];
 
-    protected $perPage = 20;
+    protected $perPage = 25;
 
     /**
      * Attributes that should be mass-assignable.
      *
      * @var array
      */
-    protected $fillable = ['name','email','pin'];
+    protected $fillable = ['name',
+            'email',
+            'email2',
+            'emailRep',
+            'pin'
+          ];
 
 
 

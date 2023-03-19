@@ -22,8 +22,11 @@ return new class extends Migration
             $table->date('date3');   
             $table->text('comments');
             $table->string('customerEmail');
+            $table->string('customerEmail2')->nullable();
+            $table->string('saleRepEmail')->nullable();
+            $table->string('vendorEmail')->nullable();
             $table->float('rebate', 14, 2)->nullable();
-            $table->string('rebateEmail')->nullable();
+            $table->string('idRebate')->nullable();            
             $table->timestamps();
             
         });
