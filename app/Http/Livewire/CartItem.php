@@ -62,6 +62,25 @@ class CartItem extends Component
 
         $this->date3= Carbon::createFromFormat('Y-m-d', $user->date3)->format('m/d/Y'); 
 
+
+        $carrito = session()->get('carrito');
+
+        if ($carrito) {
+
+            if (Arr::exists($carrito, $this->product->id)) {
+
+                $this->amount = $carrito[$this->product->id]['amount'];
+                $this->notes = $carrito[$this->product->id]['notes'];
+                $this->qtyone = $carrito[$this->product->id]['qtyone'];
+                $this->qtytwo = $carrito[$this->product->id]['qtytwo'];
+                $this->qtythree = $carrito[$this->product->id]['qtythree'];  
+                $this->finalprice = (float) $this->price - $this->notes;
+                $this->subtotal = (float) $this->amount * $this->finalprice; 
+            }           
+            
+        }
+
+
     }
 
 
@@ -101,6 +120,8 @@ class CartItem extends Component
             $this->subtotal = (float) $this->amount * $this->finalprice;
             
         }else{ 
+            
+            $this->notes='';
 
             $this->finalprice = (float) $this->price;
 
@@ -208,15 +229,7 @@ class CartItem extends Component
                 session()->put('carrito', $item);
 
                 
-            } else {
-
-
-                if (Arr::exists($carrito, $this->product->id)) {                
-
-                    return redirect()->route('home')
-                        ->with('errores', 'This product exists, please select another');                   
-    
-                } else {
+            } else {               
     
                     $carrito[$this->product->id] = [
     
@@ -231,14 +244,11 @@ class CartItem extends Component
                         'finalprice' => $this->finalprice,
                     ];
     
-                     session()->put('carrito', $carrito);
-                    
-                }
-
+                     session()->put('carrito', $carrito); 
                 
             }
             
-            return redirect()->route('home')->with('status', 'Product added successfully');
+            return redirect()->route('home')->with('status', 'Product added or updated successfully');
 
         } else {
             
@@ -250,7 +260,6 @@ class CartItem extends Component
 
 
    
-
 
     public function render()
     {

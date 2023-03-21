@@ -26,7 +26,7 @@
                         <th scope="row">{{$loop->iteration}}</th>
                         <td>{{ $item['name'] }}</td>
                         <td>{{ $item['amount'] }}</td>
-                        <td>{{ $item['finalprice'] }}</td>
+                        <td>{{ '$ '. $item['finalprice'] }}</td>
                         <td>
 
                            <form action="{{route('cartdestroy')}}" method="post">
