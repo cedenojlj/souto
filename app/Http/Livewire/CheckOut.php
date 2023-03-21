@@ -122,9 +122,12 @@ class CheckOut extends Component
                 $this->rebate=0;
             }
 
+
+
             $order= New Order();
             
             $order->customer_id= $this->Customer->id;
+            $order->customerName= $this->Customer->name;
             $order->user_id = Auth::id();
             $order->total= $total;
             $order->date1= $user->date1;

@@ -15,6 +15,7 @@ return new class extends Migration
 
             $table->id();
             $table->foreignId('customer_id')->constrained('customers')->onUpdate('cascade')->onDelete('cascade');
+            $table->string('customerName');
             $table->unsignedBigInteger('user_id');
             $table->float('total', 14, 2)->default(0);
             $table->date('date1');

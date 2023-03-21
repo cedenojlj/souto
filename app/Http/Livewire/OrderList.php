@@ -22,7 +22,7 @@ class OrderList extends Component
     public function render()
     {
         return view('livewire.order-list',[
-            'orders'=>Order::where('id','LIKE','%'.$this->search.'%')->where('user_id',Auth::id())->paginate(25),
+            'orders'=>Order::where('customerName','LIKE','%'.$this->search.'%')->where('user_id',Auth::id())->paginate(25),
         ]);
     }
 }
