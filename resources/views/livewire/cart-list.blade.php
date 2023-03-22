@@ -34,9 +34,7 @@
                                 @csrf
                                 @method('DELETE')
 
-                                <a class="btn btn-primary" href="{{route('cart.edit', $item['id'])}}">Edit</a>
-
-                                
+                                <a class="btn btn-primary" href="{{route('editcart', $item['id'])}}">Edit</a>
 
                                 <input id="idproduct" type="hidden" name="id" value="{{$item['id']}}">                              
 

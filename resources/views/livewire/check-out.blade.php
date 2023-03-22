@@ -32,7 +32,7 @@
 
                 <div class="col-md-6">                
                     
-                    <button class="btn btn-primary" wire:click="CaptarIdCliente">Search</button>
+                    <button class="btn btn-primary" wire:click="CaptarIdCliente">Search Customer</button>
                 
                 </div>
             </div> 
@@ -213,10 +213,10 @@
 
             <div class="row mt-3">
 
-                <h5>Number Order: #{{ $lastId }}</h5>
-                <h5>Date Order: {{$orderDate}}</h5>
+                <h5>Number Order: #{{ $orderDate->format('Ymdhis') }}</h5>
+                <h5>Date Order: {{$orderDate->format('m-d-Y')}}</h5>
                
-                <h5>Total Order $: {{$total}}</h5>
+                <h5>Total Order: {{'$ ' . $total}}</h5>
 
             </div>
            

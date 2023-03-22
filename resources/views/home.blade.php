@@ -20,10 +20,10 @@
                     </div>                    
                 @endif
                 
-                <h5>{{Auth::user()->name}}</h5>
-                    
+                <h5>{{Auth::user()->name}}</h5>                    
 
                     <livewire:product-lists />
+                    
                 </div>
             </div>
         </div>

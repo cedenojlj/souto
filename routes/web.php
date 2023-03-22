@@ -47,6 +47,8 @@ Route::resource('/products', ProductController::class);
 
 Route::get('addtocart/{product}',[ ProductController::class,'addtoCart'])->name('addtocart');
 
+Route::get('editcart/{id}',[ ProductController::class,'editCart'])->name('editcart');
+
 Route::post('/addtocart',[ ProductController::class,'savetocart'])->name('savetocart');
 
 Route::get('/cartlist',[ ProductController::class,'cartlist'])->name('cartlist');

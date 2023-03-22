@@ -20,8 +20,8 @@
                     </div>
                 @endif
 
+                    <h5>{{Auth::user()->name}}</h5>
                     
-
                     <livewire:cart-list />
                 </div>
             </div>

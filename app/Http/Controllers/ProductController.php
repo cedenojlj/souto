@@ -77,6 +77,13 @@ class ProductController extends Controller
         return view('addtocart.agregar', compact('product'));
     }
 
+    public function editCart($id)
+    {
+        $product = Product::find($id);
+
+        return view('addtocart.agregar', compact('product'));
+    }
+
     public function savetocart(Request $request)
     {
         
@@ -197,7 +204,7 @@ class ProductController extends Controller
 
     public function cartedit($id)
     {
-       $iditem=$id;
+        $iditem=$id;
 
         return view('addtocart.edit', compact('iditem'));
     }

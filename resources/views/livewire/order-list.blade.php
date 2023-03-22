@@ -38,7 +38,7 @@
 
                               <tr>
                                 <th scope="row">{{ $order->id }}</th>
-                                <td>{{ $order->created_at->format('mdyhis') }}</td>
+                                <td>{{ $order->created_at->format('Ymdhis') }}</td>
                                 <td>{{ $order->customerName }}</td>
                                 <td>{{ '$ '. $order->total }}</td>
                                 <td>

@@ -33,6 +33,7 @@
                 <td>{{ $product->pallet }}</td>
                 <td>{{ '$ '. $product->price }}</td>
                 <td><a href="{{route('addtocart', ['product'=> $product])}}" class="btn btn-primary btn-sm">+</a></td>
+                
               </tr>
 
 

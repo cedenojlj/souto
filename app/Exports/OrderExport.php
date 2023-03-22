@@ -21,7 +21,7 @@ class OrderExport implements FromView, ShouldAutoSize
     public function view(): View
     {
         $orden= Order::find($this->id);
-        $orderDate= $orden->created_at->format('mdyhis');
+        $orderDate= $orden->created_at->format('Ymdhis');
         
         
         $customer= Customer::find($orden->customer_id);
