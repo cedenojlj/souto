@@ -44,6 +44,7 @@ Route::resource('/customers', CustomerController::class);
 Route::resource('/products', ProductController::class);
 
 
+Route::get('homenew',[ ProductController::class,'addProductItem'])->name('homenew');
 
 Route::get('addtocart/{product}',[ ProductController::class,'addtoCart'])->name('addtocart');
 

@@ -77,6 +77,14 @@ class ProductController extends Controller
         return view('addtocart.agregar', compact('product'));
     }
 
+    public function addProductItem()
+    {
+        // $products = Product::all();
+        // return view('homeNew', compact('products'));
+
+        return view('homeNew');
+    }
+
     public function editCart($id)
     {
         $product = Product::find($id);
