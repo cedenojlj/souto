@@ -2,18 +2,47 @@
         
     <h5>{{Auth::user()->name}}</h5>  
 
-            {{$mensajex}}
+                            
+               @if ($mensajex)
 
-            <div>
+
+                    @if ($mierror)
+
+                            <div class="alert alert-danger" role="alert">
+                                {{$mensajex}}
+                            </div> 
+                    
+                        @else
+
+                            <div class="alert alert-success" role="alert">
+                                {{$mensajex}}
+                            </div> 
+                    
+                        @endif   
+
+                   
+               @endif
+            
+
+            {{-- <div>
+
                 @foreach ($products as $i =>$product)
-                    {{-- <input type="text" wire:model="user.posts.{{ $i }}.title" /> --}}
-             
-                    <span class="error">
-                        @error('amount.'.$i) {{ $message }} @enderror
-                    </span>
+
+                                        
+                        @error('amount.'.$i) 
+
+                            <div class="alert alert-danger" role="alert">
+
+                                {{$message}}
+
+                            </div>                        
+                          
+                        
+                        @enderror 
+
                 @endforeach            
                 
-            </div>
+            </div> --}}
 
             <table class="table">
 
@@ -39,7 +68,9 @@
                     @foreach ($products as $product)
 
                    
-                    <tr class="{{$control == $product->id ? $status:''}}">                           
+                    <tr class="{{$control == $product->id ? $status:''}}">  
+                        
+                        
 
                             {{-- @livewire('product-item', ['product' => $product], key($product->id)) --}}
 
@@ -56,9 +87,9 @@
                                     @error('amount.'.$product->id) {{ $message }} @enderror
                                 </span>
 
-                                <span>
+                                {{-- <span>
                                     {{ $control == $product->id ? $mensajex: ''}}
-                                </span>
+                                </span> --}}
                                 
                             </td>
                             <td>{{$product->itemnumber}}</td>
@@ -77,7 +108,10 @@
                                 </span>
                             
                             </td>
-                            <td>{{$finalprice}}</td>
+
+
+                            <td>{{!empty($notes[$product->id])? $product->price - $notes[$product->id] :$product->price}}</td>
+
                     
                             <td><input wire:model="qtyone.{{$product->id}}" 
                                 id="qtyone" type="text" 
@@ -115,11 +149,9 @@
                                
                     
                     
-                    </tr>
-                             
-                       
+                    </tr> 
 
-                        {{-- <livewire:product-item :product="$product" :wire:key="$product->id"> --}}
+                     
 
                      @endforeach                           
                     
@@ -128,3 +160,5 @@
 
 
 </div>
+
+
