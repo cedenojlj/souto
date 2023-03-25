@@ -196,9 +196,23 @@ class ProductContainer extends Component
 
     public function excluir($id)
     {
-        $this->mensajex= 'eliminando productos '. $id;
-        $this->status = 'table-danger';
-        $this->control=$id;
+        
+        $carrito = session('carrito');        
+        
+        if (Arr::exists($carrito, $id)) {  
+            
+            unset($carrito[$id]);
+
+            session()->put('carrito', $carrito);   
+            
+            $this->mensajex= 'Product deleted successfully';
+            $this->status = 'table-danger';
+            $this->control=$id;
+            $this->mierror=true;  
+
+        }        
+        
+       
     } 
 
     public function render()
