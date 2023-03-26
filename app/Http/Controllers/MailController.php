@@ -24,3 +24,5 @@ class MailController extends Controller
         dd("all is ready");
     }
 }
+
+

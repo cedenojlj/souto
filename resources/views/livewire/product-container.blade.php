@@ -66,16 +66,20 @@
                     <thead>
                         <tr>
                             <th scope="col">Order Qty</th>
-                            <th scope="col">Item Number</th>
+                            {{-- <th scope="col">Item Number</th> --}}
                             <th scope="col">Description</th>
                             <th scope="col">Scan Item UPC</th>
                             <th scope="col">Cases per Pallet</th>
                             <th scope="col">Food Show Deal</th>
                             <th scope="col">Notes</th>
                             <th scope="col">Final Price</th>
-                            <th scope="col">{{Auth::user()->date1}}</th>
+                            {{-- <th scope="col">{{Auth::user()->date1}}</th>
                             <th scope="col">{{Auth::user()->date2}}</th>
-                            <th scope="col">{{Auth::user()->date3}}</th>  
+                            <th scope="col">{{Auth::user()->date3}}</th>  --}} 
+                            <th scope="col">{{$fecha1}}</th>
+                            <th scope="col">{{$fecha2}}</th>
+                            <th scope="col">{{$fecha3}}</th> 
+
                             <th scope="col">Actions</th>                             
                         </tr>
                     </thead>
@@ -111,7 +115,7 @@
                                     </span> --}}
                                     
                                 </td>
-                                <td>{{$product->itemnumber}}</td>
+                                {{-- <td>{{$product->itemnumber}}</td> --}}
                                 <td>{{$product->description}}</td>
                                 <td>{{$product->upc}}</td>
                                 <td>{{$product->pallet}}</td>

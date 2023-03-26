@@ -53,7 +53,7 @@ class DemoEmail extends Mailable
     {
         return [
 
-            Attachment::fromStorage('public/000SENIAT.jpg'),
+            /* Attachment::fromStorage('public/000SENIAT.jpg'), */
         ];
     }
 }

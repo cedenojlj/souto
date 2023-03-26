@@ -247,8 +247,15 @@ class ProductContainer extends Component
 
     public function render()
     {
+        $user=User::find(Auth::id());        
+       
         return view('livewire.product-container',[
-            'products' => Product::all()]);
+
+            'products' => Product::all(),
+            'fecha1'=> Carbon::createFromFormat('Y-m-d', $user->date1)->format('m/d/Y'),
+            'fecha2'=> Carbon::createFromFormat('Y-m-d', $user->date2)->format('m/d/Y'),
+            'fecha3'=> Carbon::createFromFormat('Y-m-d', $user->date1)->format('m/d/Y')]);
+
     }
 }
 
