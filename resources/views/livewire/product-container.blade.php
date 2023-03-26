@@ -23,14 +23,20 @@
                    
                @endif
 
-              
-               <div class="row mt-2">
+              @if ($mostrarCheckout)
+
+                <div class="row mt-2">
+
                     <div class="col">
 
                         <a class="btn btn-primary" href="{{route('checkout')}}">Checkout</a>
 
                     </div>
+
                 </div>
+                  
+              @endif
+               
             
 
             {{-- <div>
@@ -55,7 +61,7 @@
 
             <div class="table-responsive">
 
-                <table class="table table-hover table-sm">
+                <table class="table table-sm">
 
                     <thead>
                         <tr>
@@ -79,7 +85,9 @@
                         @foreach ($products as $product)
     
                        
-                        <tr class="{{$control == $product->id ? $status:''}}">  
+                       {{--  <tr class="{{$control == $product->id ? $status:''}}">   --}}
+
+                        <tr class="{{empty($indicador[$product->id]) ? '': $indicador[$product->id]}}"> 
                             
                             
     

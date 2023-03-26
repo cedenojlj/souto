@@ -45,6 +45,10 @@ class ProductContainer extends Component
 
    public $mierror=false;
 
+   public $mostrarCheckout=false;
+
+   public $indicador;
+
    protected $rules = [
 
 
@@ -56,6 +60,15 @@ class ProductContainer extends Component
     
     ];
 
+   /*  public function mount()
+    {
+       $listaProductos = Product::all();
+       
+        foreach ($listaProductos as $key => $item) {
+        
+            $indicador[$item->id]='';
+       }
+    } */
    
 
     public function incluir($id)
@@ -180,6 +193,9 @@ class ProductContainer extends Component
             $this->control=$id;
             $this->mierror=false; 
 
+            $this->mostrarCheckout=true;
+            $this->indicador[$id]= 'table-success';
+
             
         }else {
 
@@ -187,7 +203,8 @@ class ProductContainer extends Component
             $this->mensajex= 'The quantity must be equal to 
             the sum of the quantity One, two and three'; 
             $this->control=$id; 
-            $this->mierror=true;              
+            $this->mierror=true;
+            $this->indicador[$id]= 'table-danger';              
             # code...
         }
 
@@ -209,8 +226,21 @@ class ProductContainer extends Component
             $this->status = 'table-danger';
             $this->control=$id;
             $this->mierror=true;  
+            $this->indicador[$id]= 'table-danger';   
 
         }        
+
+        if (session('carrito')) {
+            
+            $this->mostrarCheckout=true;
+
+        }else{
+
+            $this->mostrarCheckout=false;
+
+        } 
+
+       
         
        
     } 
@@ -221,3 +251,4 @@ class ProductContainer extends Component
             'products' => Product::all()]);
     }
 }
+
