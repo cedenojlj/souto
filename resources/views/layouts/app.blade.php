@@ -81,19 +81,19 @@
                             <a class="nav-link" href="{{ route('orders') }}"> <i class="bi bi-clipboard-data"></i> Order</a>
                         </li>
 
-                        
+                       {{--  
                         @if (session('carrito'))
 
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('checkout') }}"><i class="bi bi-cart-check"></i> Checkout</a>
                             </li>
                             
-                        @endif
+                        @endif --}}
                         
 
-                        <li class="nav-item">
+                         {{-- <li class="nav-item">
                             <a class="nav-link" href="{{ route('cartlist') }}"><i class="bi bi-cart-check"></i> Cart</a>
-                        </li>
+                        </li> --}} 
 
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

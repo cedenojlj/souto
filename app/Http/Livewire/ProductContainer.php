@@ -139,8 +139,13 @@ class ProductContainer extends Component
 
         $sumaparcial = $this->qtyone[$id] + $this->qtytwo[$id] + $this->qtythree[$id];
 
+        if (empty($this->amount[$id])) {
+            
+            $this->amount[$id] = 0;
+        }
+
         
-        if ( $sumaparcial == $this->amount[$id] ) {
+        if ( $sumaparcial == $this->amount[$id] and $this->amount[$id]>0 ) {
 
             // dd($this->product->price);             
             
