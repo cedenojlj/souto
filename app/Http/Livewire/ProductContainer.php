@@ -47,7 +47,7 @@ class ProductContainer extends Component
 
    public $mostrarCheckout=false;
 
-   public $indicador;
+   public $indicador;   
 
    protected $rules = [
 
@@ -69,7 +69,28 @@ class ProductContainer extends Component
             $indicador[$item->id]='';
        }
     } */
-   
+
+
+    public function updated($propertyName)
+    {
+
+        $this->validateOnly($propertyName);
+
+    }
+  
+    public function save()
+    {
+        
+
+        
+
+
+
+
+
+
+    }
+
 
     public function incluir($id)
     {   
@@ -252,11 +273,32 @@ class ProductContainer extends Component
 
     public function render()
     {
-        $user=User::find(Auth::id());        
+        $user=User::find(Auth::id());  
+        
+        $items=[];
+        
+        $productos = Product::all();
+
+        foreach ( $productos as $key => $value) {
+
+            $items[]=[               
+    
+                    'id'=>$value['id'],
+                    'itemnumber'=>$value['itemnumber'],
+                    'name'=>$value['name'],
+                    'description'=>$value['description'],
+                    'upc'=>$value['upc'],
+                    'pallet'=>$value['pallet'],
+                    'price'=>$value['price'],    
+            ];  
+            # code...
+        }
+
+        //dd($items);
        
         return view('livewire.product-container',[
 
-            'products' => Product::all(),
+            'products' => $items,
             'fecha1'=> Carbon::createFromFormat('Y-m-d', $user->date1)->format('m/d/Y'),
             'fecha2'=> Carbon::createFromFormat('Y-m-d', $user->date2)->format('m/d/Y'),
             'fecha3'=> Carbon::createFromFormat('Y-m-d', $user->date1)->format('m/d/Y')]);

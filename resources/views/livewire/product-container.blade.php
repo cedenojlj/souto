@@ -37,7 +37,14 @@
                   
               @endif
                
-            
+            <div class="row mt-2">
+
+              <div class="col">
+
+                <button type="button" wire:click="save" name="" id="" class="btn btn-primary">checkout</button>
+
+              </div>
+            </div>
 
             {{-- <div>
 
@@ -86,89 +93,89 @@
                     <tbody>
     
                        
-                        @foreach ($products as $product)
+                        @foreach ($products as $key => $value)
     
                        
-                       {{--  <tr class="{{$control == $product->id ? $status:''}}">   --}}
+                       {{--  <tr class="{{$control == $key ? $status:''}}">   --}}
 
-                        <tr class="{{empty($indicador[$product->id]) ? '': $indicador[$product->id]}}"> 
+                        <tr class="{{empty($indicador[$key]) ? '': $indicador[$key]}}"> 
                             
                             
     
-                                {{-- @livewire('product-item', ['product' => $product], key($product->id)) --}}
+                                {{-- @livewire('product-item', ['product' => $value], key($key)) --}}
     
                                {{--  <td> <button wire:click="agregar" type="button" class="btn btn-primary btn-sm">+</button> 
                                 <button wire:click="eliminar" type="button" class="btn btn-danger btn-sm">-</button> </th>     --}}
                        
                                 <td>
-                                    <input wire:model="amount.{{$product->id}}" 
-                                    id="amount" type="text" 
-                                    class="form-control @error('amount.'.$product->id) is-invalid @enderror" 
+                                    <input wire:model="amount.{{$key}}" 
+                                    id="amount" type="number" min="0" 
+                                    class="form-control @error('amount.'.$key) is-invalid @enderror" 
                                     name="amount" required autofocus>
                                     
                                     <span class="error">
-                                        @error('amount.'.$product->id) {{ $message }} @enderror
+                                        @error('amount.'.$key) {{ $message }} @enderror
                                     </span>
     
                                     {{-- <span>
-                                        {{ $control == $product->id ? $mensajex: ''}}
+                                        {{ $control == $key ? $mensajex: ''}}
                                     </span> --}}
                                     
                                 </td>
-                                {{-- <td>{{$product->itemnumber}}</td> --}}
-                                <td>{{$product->description}}</td>
-                                <td>{{$product->upc}}</td>
-                                <td>{{$product->pallet}}</td>
-                                <td>{{$product->price}}</td>
+                                {{-- <td>{{$value[itemnumber}}</td> --}}
+                                <td>{{$value['description']}}</td>
+                                <td>{{$value['upc']}}</td>
+                                <td>{{$value['pallet']}}</td>
+                                <td>{{$value['price']}}</td>
     
     
-                                <td><input wire:model="notes.{{$product->id}}" 
-                                    id="notes" type="text" 
-                                    class="form-control @error('notes.'.$product->id) is-invalid @enderror" name="notes" >
+                                <td><input wire:model="notes.{{$key}}" 
+                                    id="notes" type="number" min="0" step="0.01"
+                                    class="form-control @error('notes.'.$key) is-invalid @enderror" name="notes" >
                                 
                                     <span class="error">
-                                        @error('notes.'.$product->id) {{ $message }} @enderror
+                                        @error('notes.'.$key) {{ $message }} @enderror
                                     </span>
                                 
                                 </td>
     
     
-                                <td>{{!empty($notes[$product->id])? $product->price - $notes[$product->id] :$product->price}}</td>
+                                <td>{{!empty($notes[$key])? $value['price'] - $notes[$key] :$value['price']}}</td>
     
                         
-                                <td><input wire:model="qtyone.{{$product->id}}" 
-                                    id="qtyone" type="text" 
-                                    class="form-control @error('qtyone.'.$product->id) is-invalid @enderror" name="qtyone" required>
+                                <td><input wire:model="qtyone.{{$key}}" 
+                                    id="qtyone" type="number" min="0" 
+                                    class="form-control @error('qtyone.'.$key) is-invalid @enderror" name="qtyone" required>
                                 
                                     
                                     <span class="error">
-                                        @error('qtyone.'.$product->id) {{ $message }} @enderror
+                                        @error('qtyone.'.$key) {{ $message }} @enderror
                                     </span>
     
                                 </td>
                         
-                                <td><input wire:model="qtytwo.{{$product->id}}"  
-                                    id="qtytwo" type="text" 
-                                    class="form-control @error('qtytwo.'.$product->id) is-invalid @enderror" name="qtytwo">
+                                <td><input wire:model="qtytwo.{{$key}}"  
+                                    id="qtytwo" type="number" min="0" 
+                                    class="form-control @error('qtytwo.'.$key) is-invalid @enderror" name="qtytwo">
                                 
                                      <span class="error">
-                                        @error('qtytwo.'.$product->id) {{ $message }} @enderror
+                                        @error('qtytwo.'.$key) {{ $message }} @enderror
                                     </span>
     
                                 </td>
                         
-                                <td><input wire:model="qtythree.{{$product->id}}" 
-                                    id="qtythree" type="text" 
-                                    class="form-control @error('qtythree.'.$product->id) is-invalid @enderror" name="qtythree">
+                                <td><input wire:model="qtythree.{{$key}}" 
+                                    id="qtythree" type="number" min="0" 
+                                    class="form-control @error('qtythree.'.$key) is-invalid @enderror" name="qtythree">
                                 
                                     <span class="error">
-                                        @error('qtythree.'.$product->id) {{ $message }} @enderror
+                                        @error('qtythree.'.$key) {{ $message }} @enderror
                                     </span>
     
                                 </td> 
     
-                                <td> <button wire:click.prevent="incluir({{$product->id}})" type="button" class="btn btn-primary btn-sm">+</button> 
-                                    <button wire:click.prevent="excluir({{$product->id}})" type="button" class="btn btn-danger btn-sm">-</button> </th>    
+                                <td> <button wire:click.prevent="incluir({{$key}})" type="button" class="btn btn-primary btn-sm">+</button> 
+                                    <button wire:click.prevent="excluir({{$key}})" type="button" class="btn btn-danger btn-sm">-</button> </th>    
                                    
                         
                         
