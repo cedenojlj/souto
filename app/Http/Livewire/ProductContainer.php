@@ -47,7 +47,10 @@ class ProductContainer extends Component
 
    public $mostrarCheckout=false;
 
-   public $indicador;   
+   public $indicador;  
+   
+   public $items;
+
 
    protected $rules = [
 
@@ -71,18 +74,134 @@ class ProductContainer extends Component
     } */
 
 
-    public function updated($propertyName)
+   /*  public function updated($propertyName)
     {
 
         $this->validateOnly($propertyName);
+
+    } */
+
+    public function mount()
+    {
+        $productos = Product::all();
+
+        foreach ( $productos as $key => $value) {
+
+            $this->items[]=[               
+    
+                    'id'=>$value['id'],
+                    'itemnumber'=>$value['itemnumber'],
+                    'name'=>$value['name'],
+                    'description'=>$value['description'],
+                    'upc'=>$value['upc'],
+                    'pallet'=>$value['pallet'],
+                    'price'=>$value['price'],    
+            ];  
+            # code...
+        }
 
     }
   
     public function save()
     {
-        
 
+        //dd($this->items);
+
+        //dd($this->amount);
         
+        foreach ($this->items as $key => $value) {
+
+
+        if (isset($this->amount[$key])) {
+
+            if (empty($this->notes[$key])) {
+
+                $this->notes[$key]= 0;            
+            }
+    
+            if (empty($this->qtyone[$key])) {
+    
+                $this->qtyone[$key]= 0;            
+            }
+    
+            if (empty($this->qtytwo[$key])) {
+    
+                $this->qtytwo[$key]= 0;            
+            }
+    
+            if (empty($this->qtythree[$key])) {
+    
+                $this->qtythree[$key]= 0;            
+            }
+
+            $sumaparcial = $this->qtyone[$key] + $this->qtytwo[$key] + $this->qtythree[$key];
+
+            
+            if ($sumaparcial == $this->amount[$key] and $this->amount[$key]>0) {
+
+
+                $this->mensajex= 'Product added or updated successfully';                
+                $this->mierror=false;
+                $this->indicador[$key]= 'table-success';
+
+                # code...
+            } else {
+                
+                $this->mensajex= 'The quantity must be equal to 
+                the sum of the quantity One, two and three';                
+                $this->mierror=true;
+                $this->indicador[$key]= 'table-danger';  
+
+                # code...
+            }
+            
+
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            # code...
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        }
+
 
 
 
@@ -273,32 +392,10 @@ class ProductContainer extends Component
 
     public function render()
     {
-        $user=User::find(Auth::id());  
-        
-        $items=[];
-        
-        $productos = Product::all();
-
-        foreach ( $productos as $key => $value) {
-
-            $items[]=[               
-    
-                    'id'=>$value['id'],
-                    'itemnumber'=>$value['itemnumber'],
-                    'name'=>$value['name'],
-                    'description'=>$value['description'],
-                    'upc'=>$value['upc'],
-                    'pallet'=>$value['pallet'],
-                    'price'=>$value['price'],    
-            ];  
-            # code...
-        }
-
-        //dd($items);
+        $user=User::find(Auth::id());        
        
         return view('livewire.product-container',[
-
-            'products' => $items,
+            
             'fecha1'=> Carbon::createFromFormat('Y-m-d', $user->date1)->format('m/d/Y'),
             'fecha2'=> Carbon::createFromFormat('Y-m-d', $user->date2)->format('m/d/Y'),
             'fecha3'=> Carbon::createFromFormat('Y-m-d', $user->date1)->format('m/d/Y')]);
