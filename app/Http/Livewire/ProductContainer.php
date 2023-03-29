@@ -17,7 +17,7 @@ class ProductContainer extends Component
 
    public $product;    
 
-   public $finalprice;
+  // public $finalprice;
 
    public $subtotal;
 
@@ -108,31 +108,41 @@ class ProductContainer extends Component
         //dd($this->items);
 
         //dd($this->amount);
+
+        $articulos=[];
         
         foreach ($this->items as $key => $value) {
 
 
         if (isset($this->amount[$key])) {
 
-            if (empty($this->notes[$key])) {
+            if ($this->amount[$key]<0) {
+
+                $this->amount[$key]=0;                
+               
+            }
+
+            if (empty($this->notes[$key]) or $this->notes[$key]<0) {
 
                 $this->notes[$key]= 0;            
             }
     
-            if (empty($this->qtyone[$key])) {
+            if (empty($this->qtyone[$key]) or $this->qtyone[$key]<0) {
     
                 $this->qtyone[$key]= 0;            
             }
     
-            if (empty($this->qtytwo[$key])) {
+            if (empty($this->qtytwo[$key]) or $this->qtytwo[$key] <0) {
     
                 $this->qtytwo[$key]= 0;            
             }
     
-            if (empty($this->qtythree[$key])) {
+            if (empty($this->qtythree[$key]) or $this->qtythree[$key]<0) {
     
                 $this->qtythree[$key]= 0;            
             }
+
+            $finalprice = (float) $value['price'] - (float) $this->notes[$key];
 
             $sumaparcial = $this->qtyone[$key] + $this->qtytwo[$key] + $this->qtythree[$key];
 
@@ -140,67 +150,52 @@ class ProductContainer extends Component
             if ($sumaparcial == $this->amount[$key] and $this->amount[$key]>0) {
 
 
-                $this->mensajex= 'Product added or updated successfully';                
+                //$this->mensajex= 'Product added or updated successfully';                
                 $this->mierror=false;
                 $this->indicador[$key]= 'table-success';
+
+                $articulos[]=[               
+    
+                    'id'=>$key,
+                    'itemnumber'=>$value['itemnumber'],
+                    'name'=>$value['name'],
+                    'description'=>$value['description'],
+                    'upc'=>$value['upc'],
+                    'pallet'=>$value['pallet'],
+                    'price'=>$value['price'],    
+        
+                    ];  
 
                 # code...
             } else {
                 
-                $this->mensajex= 'The quantity must be equal to 
-                the sum of the quantity One, two and three';                
+                /* $this->mensajex= 'The quantity must be equal to 
+                the sum of the quantity One, two and three';     */            
                 $this->mierror=true;
                 $this->indicador[$key]= 'table-danger';  
 
                 # code...
-            }
-            
+            }    
 
-            
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            # code...
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            # code..
+        }     
 
         }
+
+        //dd($articulos);
+
+        if ($this->mierror) {
+
+
+            $this->mensajex= 'The quantity must be equal to 
+                the sum of the quantity One, two and three';                 
+            
+        } else{
+
+
+
+
+        }        
 
 
 
@@ -273,7 +268,7 @@ class ProductContainer extends Component
 
        
 
-        $this->finalprice = (float) $this->price - (float) $this->notes[$id];
+        //$this->finalprice = (float) $this->price - (float) $this->notes[$id];
 
        // dd($this->finalprice[$id]);
 
