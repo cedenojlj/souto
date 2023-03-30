@@ -73,9 +73,9 @@
                             <a class="nav-link" href="{{ route('customers.index') }}"> <i class="bi bi-person-check"></i> Customers</a>
                         </li>
 
-                        {{-- <li class="nav-item">
+                      {{--  <li class="nav-item">
                             <a class="nav-link" href="{{ route('products.index') }}"> Items</a>
-                        </li> --}}
+                        </li>  --}}
 
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('orders') }}"> <i class="bi bi-clipboard-data"></i> Order</a>

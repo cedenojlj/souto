@@ -23,7 +23,7 @@
                    
                @endif
 
-              @if ($mostrarCheckout)
+             {{--  @if ($mostrarCheckout)
 
                 <div class="row mt-2">
 
@@ -35,7 +35,44 @@
 
                 </div>
                   
-              @endif
+              @endif --}}
+
+
+            
+
+            <div class="row justify-content-center">
+
+                <div class="col-md-12">
+
+                    <div class="card">
+                        
+                        <div class="card-header">Add Items</div>
+        
+                        <div class="card-body">
+
+
+                            <div class="row mb-3">
+
+                                <label for="search" class="col-md-8 col-form-label text-md-end">Search:</label>
+
+                                <div class="col-md-4">
+                                    
+                                    <input wire:model="search" class="form-control" type="text" placeholder="Search customers..."/>            
+                                
+                                </div>
+                            </div>
+
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+           
+
+
+
                
             <div class="row mt-2">
 
@@ -44,28 +81,7 @@
                 <button type="button" wire:click="save" name="" id="" class="btn btn-primary">checkout</button>
 
               </div>
-            </div>
-
-            {{-- <div>
-
-                @foreach ($products as $i =>$product)
-
-                                        
-                        @error('amount.'.$i) 
-
-                            <div class="alert alert-danger" role="alert">
-
-                                {{$message}}
-
-                            </div>                        
-                          
-                        
-                        @enderror 
-
-                @endforeach            
-                
-            </div> --}}
-
+            </div>          
             
 
                 <div class="table-responsive">
@@ -89,7 +105,6 @@
                                 <th scope="col">{{$fecha2}}</th>
                                 <th scope="col">{{$fecha3}}</th> 
 
-                                <th scope="col">Actions</th>                             
                             </tr>
                         </thead>
                         <tbody>
@@ -177,11 +192,7 @@
                                             @error('qtythree.'.$key) {{ $message }} @enderror
                                         </span>
         
-                                    </td> 
-        
-                                    <td> <button wire:click.prevent="incluir({{$key}})" type="button" class="btn btn-primary btn-sm">+</button> 
-                                        <button wire:click.prevent="excluir({{$key}})" type="button" class="btn btn-danger btn-sm">-</button> </th>    
-                                    
+                                    </td>     
                             
                             
                             </tr> 

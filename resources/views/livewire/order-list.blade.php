@@ -35,7 +35,7 @@
                             <tbody>
 
                             @foreach($orders as $order)
-
+ 
                               <tr>
                                 <th scope="row">{{ $order->id }}</th>
                                 <td>{{ $order->created_at->format('Ymdhis') }}</td>
