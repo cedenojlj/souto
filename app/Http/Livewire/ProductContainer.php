@@ -63,24 +63,7 @@ class ProductContainer extends Component
     
     ];
 
-   /*  public function mount()
-    {
-       $listaProductos = Product::all();
-       
-        foreach ($listaProductos as $key => $item) {
-        
-            $indicador[$item->id]='';
-       }
-    } */
-
-
-   /*  public function updated($propertyName)
-    {
-
-        $this->validateOnly($propertyName);
-
-    } */
-
+   
     public function mount()
     {
         $productos = Product::all();
@@ -105,11 +88,8 @@ class ProductContainer extends Component
     public function save()
     {
 
-        //dd($this->items);
-
-        //dd($this->amount);
-
-        $articulos=[];
+       
+        session()->forget('carrito');
         
         foreach ($this->items as $key => $value) {
 
@@ -150,22 +130,60 @@ class ProductContainer extends Component
             if ($sumaparcial == $this->amount[$key] and $this->amount[$key]>0) {
 
 
-                //$this->mensajex= 'Product added or updated successfully';                
+                           
                 $this->mierror=false;
                 $this->indicador[$key]= 'table-success';
+                
+                    //******************************************* */
 
-                $articulos[]=[               
-    
-                    'id'=>$key,
-                    'itemnumber'=>$value['itemnumber'],
-                    'name'=>$value['name'],
-                    'description'=>$value['description'],
-                    'upc'=>$value['upc'],
-                    'pallet'=>$value['pallet'],
-                    'price'=>$value['price'],    
+
+                    $item = [
+
+                        $key => [
+            
+                            'id'=>$value['id'],
+                            'name'=>$value['name'],
+                            'price'=>$value['price'], 
+                            'amount' => $this->amount[$key],
+                            'notes' => (float) $this->notes[$key],
+                            'qtyone' => $this->qtyone[$key],
+                            'qtytwo' => $this->qtytwo[$key],
+                            'qtythree' => $this->qtythree[$key],                
+                            'finalprice' => $finalprice,
+                        ]
+            
+                    ];   
         
-                    ];  
+                    $carrito = session()->get('carrito');
+        
+                    if (!$carrito) {
+        
+        
+                        session()->put('carrito', $item);
+        
+                        
+                    } else {               
+            
+                            $carrito[$key] = [
+            
+                                
+                                'id'=>$value['id'],
+                                'name'=>$value['name'],
+                                'price'=>$value['price'], 
+                                'amount' => $this->amount[$key],
+                                'notes' => $this->notes[$key],
+                                'qtyone' => $this->qtyone[$key],
+                                'qtytwo' => $this->qtytwo[$key],
+                                'qtythree' => $this->qtythree[$key],                
+                                'finalprice' => $finalprice,
+                            ];
+            
+                             session()->put('carrito', $carrito); 
+                        
+                    }
 
+
+                    //*********************************************** */
                 # code...
             } else {
                 
@@ -182,7 +200,7 @@ class ProductContainer extends Component
 
         }
 
-        //dd($articulos);
+      
 
         if ($this->mierror) {
 
@@ -193,8 +211,8 @@ class ProductContainer extends Component
         } else{
 
 
-
-
+            $this->mensajex= 'Product added or updated successfully';  
+            
         }        
 
 
