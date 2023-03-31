@@ -1,48 +1,140 @@
 
-<h4>Order Date: {{$orderDate}}</h4>
-<h4>Order Number: {{$orden->id}}</h4>
-<h4>Customer: {{$customer->name}}</h4>
+
+    <table class="table">
+       
+        <tbody>
+            <tr>
+                <td></td>
+                <th style="font-size:16px"> <strong>Order:</strong></th>
+                <td style="font-size:16px"><strong>{{ $orderDate}}</strong></td>                  
+                <td></td>              
+            </tr>    
+            <tr>
+                <td></td>
+                <th style="font-size:16px; color:#fcbf43"> <strong>Customer:</strong></th>
+                <td style="font-size:16px"><strong>{{$customer->name}}</strong></td>  
+                <td></td>
+                            
+            </tr>   
+            
+            <tr>
+                <td></td>
+                <th style="font-size:16px; color:#fcbf43"> <strong>Vendor:</strong></th>
+                <td style="font-size:16px"><strong>{{Auth::user()->name}}</strong></td> 
+                <td></td>                             
+            </tr>   
+           
+        </tbody>
+    </table>
+
 
 
 <table>
     <thead>
     <tr>        
-        <th>Qty</th>
-        <th>Description</th>       
+        <th style="background-color: #fcbf43;border: 1px solid #000000;"><strong>   Qty </strong>  </th>
+        <th style="background-color: #999793;border: 1px solid #000000;"><strong>   Item Number </strong>  </th> 
+        <th style="background-color: #999793;border: 1px solid #000000;"><strong>   Description </strong>  </th> 
+        <th style="background-color: #999793;border: 1px solid #000000;"><strong>   Scan Item UPC </strong>  </th>
+        <th style="background-color: #999793;border: 1px solid #000000;"><strong>   Cases per Pallet </strong>  </th>
+        <th style="background-color: #999793;border: 1px solid #000000;"><strong>   Food Show Deal </strong>  </th>
+        <th style="background-color: #fcbf43;border: 1px solid #000000;"><strong>   notes </strong>  </th>
 
-        <th>Scan Item UPC</th>
-        <th>Cases per Pallet</th>
-        <th>Food Show Deal</th>
-        <th>notes</th>
-
-        <th>finalprice</th>
-        <th>{{$orden->date1}}</th>
-        <th>{{$orden->date2}}</th>
-        <th>{{$orden->date3}}</th>
+        <th style="background-color: #999793;border: 1px solid #000000;"><strong>   finalprice </strong>  </th>
+        <th style="background-color: #fcbf43;border: 1px solid #000000;"><strong>   {{$orden->date1}} </strong>  </th>
+        <th style="background-color: #fcbf43;border: 1px solid #000000;"><strong>   {{$orden->date2}} </strong>  </th>
+        <th style="background-color: #fcbf43;border: 1px solid #000000;"><strong>   {{$orden->date3}} </strong>  </th>
     </tr>
     </thead>
     <tbody>
     @foreach($orders as $order)
         <tr>
             
-            <td>{{ $order->amount }}</td>
-            <td>{{ $order->name }}</td>            
+            <td style="border: 1px solid #000000;" >{{ $order->amount }}</td>
+            <td style="border: 1px solid #000000;">7777</td> 
+            <td style="border: 1px solid #000000;">{{ $order->name }}</td>  
+                      
 
-            <td>{{ $order->upc }}</td>
-            <td>{{ $order->pallet }}</td>
-            <td>{{ $order->price }}</td>
-            <td>{{ $order->notes }}</td>
+            <td style="border: 1px solid #000000;">{{ $order->upc }}</td>
+            <td style="border: 1px solid #000000;">{{ $order->pallet }}</td>
+            <td style="border: 1px solid #000000;">{{"$ ". $order->price }}</td>
+            <td style="border: 1px solid #000000;">{{ $order->notes }}</td>
 
-            <td>{{ $order->finalprice }}</td>
-            <td>{{ $order->qtyone }}</td>
-            <td>{{ $order->qtytwo }}</td>
-            <td>{{ $order->qtythree }}</td>          
+            <td style="border: 1px solid #000000;">{{"$ ". $order->finalprice }}</td>
+            <td style="border: 1px solid #000000;">{{ $order->qtyone }}</td>
+            <td style="border: 1px solid #000000;">{{ $order->qtytwo }}</td>
+            <td style="border: 1px solid #000000;">{{ $order->qtythree }}</td>          
             
         </tr>
     @endforeach
     </tbody>
 </table>
 
-<h4>Rebate: {{$orden->rebate}}</h4>
-<h4>Notes:</h4>
-<p>{{$orden->comments}}</p>
+
+
+<table class="table">
+       
+    <tbody>
+        <tr>            
+            <th style="font-size:14px"> <strong>Rebate #</strong></th>
+            <td style="font-size:14px"><strong>{{$orden->rebate}}</strong></td>  
+            
+        </tr>    
+        <tr>
+            
+            <th style="font-size:14px;"> <strong>Amount #</strong></th>
+            <td style="font-size:14px"><strong>{{"$ ". $orden->total }}</strong></td>  
+                        
+        </tr>          
+         
+       
+    </tbody>
+</table>
+
+
+<table >
+       
+    <tbody>
+        <tr> 
+            <td></td>           
+            <th style="font-size:14px"> <strong>Notes:</strong></th>  
+        </tr>    
+        <tr>          
+            <td></td>
+            <td style="font-size:16px; border-bottom: 50px solid #000000;" colspan="6">{{$orden->comments}}</td>     
+                        
+        </tr>    
+        <tr>          
+            <td></td>
+            <td style="font-size:16px; border-bottom: 50px solid #000000;" colspan="6"></td>     
+                        
+        </tr>  
+        <tr>          
+            <td></td>
+            <td style="font-size:16px; border-bottom: 50px solid #000000;" colspan="6"></td>     
+                        
+        </tr>  
+        <tr>          
+            <td></td>
+            <td style="font-size:16px; border-bottom: 50px solid #000000;" colspan="6"></td>     
+                        
+        </tr>  
+        <tr>          
+            <td></td>
+            <td style="font-size:16px; border-bottom: 50px solid #000000;" colspan="6"></td>     
+                        
+        </tr>  
+        <tr>          
+            <td></td>
+            <td style="font-size:16px; border-bottom: 50px solid #000000;" colspan="6"></td>     
+                        
+        </tr>  
+
+         
+       
+    </tbody>
+</table>
+
+
+
+
