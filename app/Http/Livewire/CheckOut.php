@@ -14,9 +14,9 @@ use Illuminate\Support\Facades\Auth;
 class CheckOut extends Component
 {
 
-    public $search='';
+    public $searchx='';
 
-    public $Customers;
+    public $Customers=[];
 
     public $idCustomer;
 
@@ -63,11 +63,18 @@ class CheckOut extends Component
     ];
 
 
-    public function CaptarIdCliente()
-    {
-        $this->Customers= Customer::where('name','LIKE','%'.$this->search.'%')->get();
+    public function updatedSearchx()
+    {       
+        
+        $this->Customers= Customer::where('name','LIKE','%'.$this->searchx.'%')->get();
        
     }
+
+   /*  public function CaptarIdCliente()
+    {
+        $this->Customers= Customer::where('name','LIKE','%'.$this->searchx.'%')->get();
+       
+    } */
 
     public function updatedidCustomer()
     {

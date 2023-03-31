@@ -26,21 +26,21 @@
 
                 <div class="col-md-6">                
                     
-                    <input type="text" class="col form-control" wire:model.defer="search">               
+                    <input type="text" class="col form-control" wire:model="searchx">               
                 
                 </div>
 
-                <div class="col-md-6">                
+                {{-- <div class="col-md-6">                
                     
                     <button class="btn btn-primary" wire:click="CaptarIdCliente">Search Customer</button>
                 
-                </div>
+                </div> --}}
             </div> 
 
 
             <form wire:submit.prevent="submit">
 
-                @if (!empty($search))
+                @if (!empty($searchx))
 
                     {{-- select customer  --}}
 

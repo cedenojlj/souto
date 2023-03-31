@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\Customer;
 use App\Exports\OrderExport;
 use Illuminate\Http\Request;
+use App\Exports\RebateExport;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -83,5 +84,23 @@ class OrderController extends Controller
       return Excel::download(new OrderExport($id), $nameFile);
 
     }
+
+    public function rebate($id) {
+
+        $order= Order::find($id);
+        $customer= Customer::find($order->customer_id);
+        $nameCustomer= $customer->name;
+  
+        $user=User::find(Auth::id());
+        $nameUser= $user->name; 
+        $orderDate= $order->created_at->format('mdyhis');   
+  
+        $nameFile= "rebate -".$nameCustomer."-".$nameUser."-".$orderDate.".xlsx";
+  
+        return Excel::download(new RebateExport($id), $nameFile);
+  
+      }
+
+
 }
 

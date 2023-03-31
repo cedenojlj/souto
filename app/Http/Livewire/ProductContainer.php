@@ -167,7 +167,9 @@ class ProductContainer extends Component
 
         //dd($bundles);
 
-        if (isset($this->idProductBundle)) {    
+        if (isset($this->idProductBundle)) {  
+            
+            //dd($this->items);
             
             $bundles = Bundle::where('numBundle', $this->idProductBundle)->where('user_id', Auth::id())->get();
 
@@ -191,6 +193,7 @@ class ProductContainer extends Component
                 # code...
             }
 
+            //dd($this->items);
             unset($bundle);
             $productBundle='';
 

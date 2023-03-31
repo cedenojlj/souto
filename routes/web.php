@@ -111,3 +111,5 @@ Route::get('orders', [OrderController::class,'index'])->name('orders');
 
 Route::get('export-order/{id}', [OrderController::class,'export']);
 
+Route::get('export-rebate/{id}', [OrderController::class,'rebate']);
+
