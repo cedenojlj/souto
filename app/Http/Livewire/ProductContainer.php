@@ -8,6 +8,7 @@ use Livewire\Component;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Arr;
+use PhpOffice\PhpSpreadsheet\Calculation\TextData\Search;
 
 class ProductContainer extends Component
 {
@@ -15,9 +16,13 @@ class ProductContainer extends Component
 
     // protected $listeners = ['incluir', 'excluir'];
 
-   public $product;    
+   public $product; 
+   
+   public $idProduct;
 
   // public $finalprice;
+
+   public $search='';
 
    public $subtotal;
 
@@ -51,6 +56,10 @@ class ProductContainer extends Component
    
    public $items;
 
+   public $listaProductos=[];
+
+   public $showFormItems=false;
+
 
    protected $rules = [
 
@@ -66,7 +75,9 @@ class ProductContainer extends Component
    
     public function mount()
     {
-        $productos = Product::all();
+        $productos = Product::all();       
+
+        //$this->listaProductos = [];
 
         foreach ( $productos as $key => $value) {
 
@@ -83,6 +94,62 @@ class ProductContainer extends Component
             # code...
         }
 
+    }
+
+    public function saveItem()
+    {
+        
+        $producto = Product::find($this->idProduct);   
+
+        //dd($producto);
+
+        if (isset($producto['id'])) {
+
+            $this->items[]=[               
+    
+                'id'=>$producto['id'],
+                'itemnumber'=>$producto['itemnumber'],
+                'name'=>$producto['name'],
+                'description'=>$producto['description'],
+                'upc'=>$producto['upc'],
+                'pallet'=>$producto['pallet'],
+                'price'=>$producto['price'],    
+        ]; 
+    
+    
+             $this->mensajex= 'Product added or updated successfully'; 
+
+            # code...
+        }else{
+
+
+            $this->mierror=true;
+
+            $this->mensajex= 'You must select a product';  
+        }
+           
+
+    }
+
+    public function closeItem()
+    {
+        $this->showFormItems=false;
+    }
+
+
+    public function openFormItem()
+    {
+        $this->showFormItems=true;
+    }
+
+
+
+
+
+
+    public function updatedSearch()
+    {
+        $this->listaProductos= Product::where('name','LIKE','%'.$this->search.'%')->orWhere('itemnumber','LIKE','%'.$this->search.'%')->get();
     }
   
     public function save()

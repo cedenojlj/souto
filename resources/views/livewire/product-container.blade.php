@@ -38,37 +38,92 @@
               @endif --}}
 
 
-            
+            {{-- Add Form Items   --}}
 
-            <div class="row justify-content-center">
+            @if ($showFormItems)             
 
-                <div class="col-md-12">
+                <div class="row justify-content-center">
 
-                    <div class="card">
-                        
-                        <div class="card-header">Add Items</div>
-        
-                        <div class="card-body">
+                    <div class="col-md-8">
 
-
-                            <div class="row mb-3">
-
-                                <label for="search" class="col-md-8 col-form-label text-md-end">Search:</label>
-
-                                <div class="col-md-4">
-                                    
-                                    <input wire:model="search" class="form-control" type="text" placeholder="Search customers..."/>            
-                                
-                                </div>
-                            </div>
-
+                        <div class="card">
                             
+                            <div class="card-header">Add Items</div>
+            
+                            <div class="card-body">
+
+                                {{--  Boton buscar   --}}
+
+                                <div class="row mb-3 justify-content-center">
+
+                                    <label for="search" class="col col-md-2 col-form-label text-md-end">Search:</label>
+
+                                    <div class="col col-md-6">
+                                        
+                                        <input wire:model="search" class="form-control" type="text" placeholder="Search Product code or name..."/>            
+                                    
+                                    </div>
+                                </div>
+
+                                
+                                {{--  Boton select   --}}
+
+                                <div class="row mb-3 justify-content-center">
+
+                                    <label for="idProduct" class="col-md-2 col-form-label text-md-end">Product:</label>
+
+                                    <div class="col-md-6">               
+                                    
+                                            <select wire:model="idProduct" class="form-select @error('idProduct') is-invalid @enderror" aria-label="Default select example">
+                        
+                                                <option selected>Open this select menu</option>
+                        
+                                                @foreach ($listaProductos as $item)
+                        
+                                                    <option value="{{$item->id}}">{{$item->itemnumber.' '.$item->name}}</option>
+                        
+                                                @endforeach                       
+                                                
+                                            </select> 
+            
+                                            @error('idProduct')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                        
+                                    </div>
+                        
+                                </div>
+
+
+                                {{--  Boton agregar   --}}
+
+                                <div class="row justify-content-md-center ">
+
+
+                                    <div class="col-md-1">
+                    
+                                    <button type="button" wire:click="saveItem" name="" id="" class="btn btn-primary">Add</button>
+                                    
+                    
+                                    </div>
+
+                                    <div class="col-md-1">
+                    
+                                        <button type="button" wire:click="closeItem" name="" id="" class="btn btn-primary">Close</button>
+                        
+                                    </div>
+
+                                </div>   
+
+                                
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-
+            @endif
            
 
 
@@ -76,9 +131,15 @@
                
             <div class="row mt-2">
 
-              <div class="col">
+              <div class="col-1">
 
                 <button type="button" wire:click="save" name="" id="" class="btn btn-primary">checkout</button>
+
+              </div>
+
+              <div class="col-2">
+
+                <button type="button" wire:click="openFormItem" name="" id="" class="btn btn-primary">Add Item</button>
 
               </div>
             </div>          
