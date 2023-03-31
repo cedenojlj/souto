@@ -125,11 +125,82 @@
 
             @endif
            
+            {{-- Add Form Bundle   --}}
+            
+            @if ($showFormItemsBundle)             
+
+                <div class="row justify-content-center mt-4">
+
+                    <div class="col-md-8">
+
+                        <div class="card">
+                            
+                            <div class="card-header">Add Bundles</div>
+            
+                            <div class="card-body">                               
+
+                                
+                                {{--  Boton select   --}}
+
+                                <div class="row mb-3 justify-content-center">
+
+                                    <label for="idProductBundle" class="col-md-2 col-form-label text-md-end">Product:</label>
+
+                                    <div class="col-md-6">               
+                                    
+                                            <select wire:model="idProductBundle" class="form-select @error('idProductBundle') is-invalid @enderror" aria-label="Default select example">
+                        
+                                                <option selected>Open this select menu</option>  
+                                                
+                                                <option value="1">Bundle 1</option>
+                                                <option value="2">Bundle 2</option>
+                                                <option value="3">Bundle 3</option>
+                                                <option value="4">Bundle 4</option>
+                                                <option value="5">Bundle 5</option>
+                                                
+                                            </select> 
+            
+                                            @error('idProductBundle')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                        
+                                    </div>
+                        
+                                </div>
 
 
+                                {{--  Boton agregar   --}}
+
+                                <div class="row justify-content-md-center ">
+
+
+                                    <div class="col-md-1">
+                    
+                                    <button type="button" wire:click="saveItemBundle" name="" id="" class="btn btn-primary">Add</button>
+                                    
+                    
+                                    </div>
+
+                                    <div class="col-md-1">
+                    
+                                        <button type="button" wire:click="closeItemBundle" name="" id="" class="btn btn-primary">Close</button>
+                        
+                                    </div>
+
+                                </div>   
+
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            @endif
 
                
-            <div class="row mt-2">
+            <div class="row mt-4">
 
               <div class="col-1">
 
@@ -137,11 +208,19 @@
 
               </div>
 
-              <div class="col-2">
+              <div class="col-1">
 
-                <button type="button" wire:click="openFormItem" name="" id="" class="btn btn-primary">Add Item</button>
+                <button type="button" wire:click="openFormItem" name="" id="" class="btn btn-primary">AddItem</button>
 
               </div>
+
+              <div class="col-1">
+
+                <button type="button" wire:click="openFormItemBundle" name="" id="" class="btn btn-primary">Bundle</button>
+
+              </div>
+
+
             </div>          
             
 
@@ -174,7 +253,7 @@
 
                             
 
-                            @foreach ($items as $key => $value)
+                            @foreach ($items as $key => &$value)
         
                         
                         {{--  <tr class="{{$control == $key ? $status:''}}">   --}}
@@ -261,10 +340,7 @@
                             
         
                             @endforeach  
-                            
-                                
-
-                        
+                                                     
                             
                         </tbody>
 
