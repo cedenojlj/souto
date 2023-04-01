@@ -87,7 +87,7 @@ class OrderController extends Controller
 
     public function rebate($id) {
 
-        $order= Order::find($id);
+        $order= Order::find($id);        
         $customer= Customer::find($order->customer_id);
         $nameCustomer= $customer->name;
   
@@ -95,7 +95,7 @@ class OrderController extends Controller
         $nameUser= $user->name; 
         $orderDate= $order->created_at->format('mdyhis');   
   
-        $nameFile= "rebate -".$nameCustomer."-".$nameUser."-".$orderDate.".xlsx";
+        $nameFile= "Rebate-".$nameCustomer."-".$nameUser."-".$orderDate.".xlsx";
   
         return Excel::download(new RebateExport($id), $nameFile);
   
