@@ -11,7 +11,8 @@ class Ordersdetail extends Model
     use HasFactory;
 
     protected $fillable = ['order_id',
-    'product_id','name','upc','pallet',
+    'product_id','name','itemnumber',
+    'upc','pallet',
     'price','amount','notes','finalprice',
     'qtyone','qtytwo','qtythree'
 

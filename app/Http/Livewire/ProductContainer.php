@@ -285,6 +285,7 @@ class ProductContainer extends Component
 
                             'id' => $value['id'],
                             'name' => $value['name'],
+                            'itemnumber' => $value['itemnumber'],
                             'price' => $value['price'],
                             'amount' => $this->amount[$key],
                             'notes' => (float) $this->notes[$key],
@@ -309,6 +310,7 @@ class ProductContainer extends Component
 
                             'id' => $value['id'],
                             'name' => $value['name'],
+                            'itemnumber' => $value['itemnumber'],
                             'price' => $value['price'],
                             'amount' => $this->amount[$key],
                             'notes' => $this->notes[$key],

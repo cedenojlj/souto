@@ -185,6 +185,7 @@ class CheckOut extends Component
                     $ordersdetail->order_id = $this->lastId;
                     $ordersdetail->product_id =  $item['id'];
                     $ordersdetail->name =  $item['name'];
+                    $ordersdetail->itemnumber =  $item['itemnumber'];
 
                     $ordersdetail->upc =  $producto->upc;
                     $ordersdetail->pallet =  $producto->pallet;

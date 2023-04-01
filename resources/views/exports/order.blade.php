@@ -6,13 +6,13 @@
             <tr>
                 <td></td>
                 <th style="font-size:16px"> <strong>Order:</strong></th>
-                <td style="font-size:16px"><strong>{{ $orderDate}}</strong></td>                  
+                <td style="font-size:16px; "><strong>{{ $orderDate}}</strong></td>                  
                 <td></td>              
             </tr>    
             <tr>
                 <td></td>
                 <th style="font-size:16px; color:#fcbf43"> <strong>Customer:</strong></th>
-                <td style="font-size:16px"><strong>{{$customer->name}}</strong></td>  
+                <td style="font-size:16px; border: 1px solid #000000;"><strong>{{$customer->name}}</strong></td>  
                 <td></td>
                             
             </tr>   
@@ -20,7 +20,7 @@
             <tr>
                 <td></td>
                 <th style="font-size:16px; color:#fcbf43"> <strong>Vendor:</strong></th>
-                <td style="font-size:16px"><strong>{{Auth::user()->name}}</strong></td> 
+                <td style="font-size:16px; border: 1px solid #000000;"><strong>{{Auth::user()->name}}</strong></td> 
                 <td></td>                             
             </tr>   
            
@@ -41,17 +41,19 @@
         <th style="background-color: #fcbf43;border: 1px solid #000000;"><strong>   notes </strong>  </th>
 
         <th style="background-color: #999793;border: 1px solid #000000;"><strong>   finalprice </strong>  </th>
-        <th style="background-color: #fcbf43;border: 1px solid #000000;"><strong>   {{$orden->date1}} </strong>  </th>
-        <th style="background-color: #fcbf43;border: 1px solid #000000;"><strong>   {{$orden->date2}} </strong>  </th>
-        <th style="background-color: #fcbf43;border: 1px solid #000000;"><strong>   {{$orden->date3}} </strong>  </th>
+        <th style="background-color: #fcbf43;border: 1px solid #000000;"><strong>   {{$date1}} </strong>  </th>
+        <th style="background-color: #fcbf43;border: 1px solid #000000;"><strong>   {{$date2}} </strong>  </th>
+        <th style="background-color: #fcbf43;border: 1px solid #000000;"><strong>   {{$date3}} </strong>  </th>
     </tr>
     </thead>
     <tbody>
+
+    
     @foreach($orders as $order)
         <tr>
             
             <td style="border: 1px solid #000000;" >{{ $order->amount }}</td>
-            <td style="border: 1px solid #000000;">7777</td> 
+            <td style="border: 1px solid #000000;">{{ $order->itemnumber }}</td> 
             <td style="border: 1px solid #000000;">{{ $order->name }}</td>  
                       
 
@@ -66,7 +68,9 @@
             <td style="border: 1px solid #000000;">{{ $order->qtythree }}</td>          
             
         </tr>
+    
     @endforeach
+
     </tbody>
 </table>
 
@@ -83,7 +87,8 @@
         <tr>
             
             <th style="font-size:14px;"> <strong>Amount #</strong></th>
-            <td style="font-size:14px"><strong>{{"$ ". $orden->total }}</strong></td>  
+            <td style="font-size:14px"><strong>{{"$ ". $orden->total }}</strong></td>   
+            
                         
         </tr>          
          

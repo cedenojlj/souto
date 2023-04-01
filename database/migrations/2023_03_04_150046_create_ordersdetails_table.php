@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('order_id')->constrained('orders')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('product_id')->constrained('products')->onUpdate('cascade')->onDelete('cascade');
             $table->string('name');
+            $table->string('itemnumber');
             $table->string('upc')->nullable();
             $table->integer('pallet')->nullable();
             $table->float('price', 8, 2)->default(0);
