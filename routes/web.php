@@ -117,6 +117,8 @@ Route::get('export-rebate/{id}', [OrderController::class,'rebate']);
 
 Route::get('sendmail/{id}', [MailController::class,'index']);
 
+Route::get('rebatemail/{id}', [MailController::class,'rebate']);
+
 
 
 
