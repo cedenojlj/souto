@@ -62,10 +62,6 @@ Route::get('cartedit/{product}',[ ProductController::class,'cartedit'])->name('c
 
 Route::get('/checkout', [ ProductController::class,'checkout'])->name('checkout');
 
-//ensayos
-
-Route::get('sendmail', [MailController::class,'index']);
-
 
 //****************************************** */
 
@@ -112,4 +108,15 @@ Route::get('orders', [OrderController::class,'index'])->name('orders');
 Route::get('export-order/{id}', [OrderController::class,'export']);
 
 Route::get('export-rebate/{id}', [OrderController::class,'rebate']);
+
+
+
+//******************************************** */
+// Enviando correos con los archivos de excel
+
+
+Route::get('sendmail/{id}', [MailController::class,'index']);
+
+
+
 

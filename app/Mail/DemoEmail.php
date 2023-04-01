@@ -15,13 +15,15 @@ class DemoEmail extends Mailable
     use Queueable, SerializesModels;
 
     public $emailData;
+    public $reporte;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($emailData)
+    public function __construct($emailData, $reporte)
     {
         $this->emailData= $emailData;
+        $this->reporte = $reporte;
     }
 
     /**
@@ -30,7 +32,7 @@ class DemoEmail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Demo Email',
+            subject: 'SoutoFoods',
         );
     }
 
@@ -53,7 +55,7 @@ class DemoEmail extends Mailable
     {
         return [
 
-            /* Attachment::fromStorage('public/000SENIAT.jpg'), */
+            Attachment::fromData(fn () => $this->reporte, 'report.xlsx'),
         ];
     }
 }
