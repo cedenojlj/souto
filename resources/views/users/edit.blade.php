@@ -73,7 +73,7 @@
                                 <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
 
                                 <div class="col-md-6">
-                                    
+
                                     <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
 
                                     @error('password')
@@ -133,9 +133,38 @@
                             </div>
                         </div>
 
-                        <div class="row mb-3">                         
+                        <div class="row mb-3">   
+                            
+                            @if (Auth::user()->rol == "admin")
 
-                            <input type="hidden" name="rol" value="{{ Auth::user()->rol}}">
+                                <label for="rol" class="col-md-4 col-form-label text-md-end">Rol</label>
+
+                                <div class="col-md-6">               
+                            
+                                    <select name="rol" class="form-select @error('rol') is-invalid @enderror" aria-label="Default select example">
+                
+                                        <option >Open this select menu</option>                
+                                                       
+                                        <option {{$user->rol == "user" ? 'selected' : ''}} value="user">User</option>
+                                        <option {{$user->rol == "admin" ? 'selected' : ''}} value="admin">Admin</option>              
+                                                              
+                                        
+                                    </select> 
+
+                                    @error('rol')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                
+                                </div>
+                            
+                            @else
+
+                                 <input type="hidden" name="rol" value="{{ $user->rol }}">
+
+                            @endif
+
                         </div>
                         
                         <div class="row mb-0">
