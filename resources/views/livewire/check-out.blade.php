@@ -17,8 +17,7 @@
     @endif
 
     <div class="text-center">
-        {{-- <div wire:loading.inline-flex wire:target="submit"> --}}
-        <div wire:loading>
+         <div wire:loading.inline-flex wire:target="submit">       
 
             <button class="btn btn-primary" type="button" disabled>
                 <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
@@ -50,7 +49,7 @@
             </div> 
                
 
-            <form wire:submit.prevent="submit" wire:loading.remove wire:target="submit" autocomplete="off">
+            <form wire:submit.prevent="submit" wire:loading.remove wire:target="submit">
 
                 @if (!empty($searchx))
 
@@ -163,7 +162,7 @@
             
                             <label for="pin" class="col-form-label">PIN</label>
             
-                            <input autocomplete="off" wire:model="pin" id="pin" type="password" class="form-control @error('pin') is-invalid @enderror" name="pin" required>
+                            <input wire:model="pin" id="pin" type="password" class="form-control @error('pin') is-invalid @enderror" name="pin" required autocomplete="new-password">
             
                             @error('pin')
                                 <span class="invalid-feedback" role="alert">
