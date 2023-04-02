@@ -13,7 +13,11 @@
 
     <h3>{{'Date: ' . $emailData['dateOrder']}}</h3>
 
+    <h3>{{'Rebate: ' . $emailData['rebate']}}</h3>
+
     <h3>{{'Customer: ' . $emailData['customer']}}</h3>
+
+    <h3>{{'Vendor: ' . $emailData['vendor']}}</h3>
 
 
     <p>We have received your order and it will be processed very soon.</p>

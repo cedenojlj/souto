@@ -31,7 +31,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <img src="{{asset('img/logo1.jpg')}}" alt="" width="50" height="60">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="{{ route('home') }}">
                     {{ config('app.name', 'SoutoFoods') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -91,9 +91,9 @@
                         @endif --}}
                         
 
-                         <li class="nav-item">
+                        {{--  <li class="nav-item">
                             <a class="nav-link" href="{{ route('cartlist') }}"><i class="bi bi-cart-check"></i> Cart</a>
-                        </li> 
+                        </li>  --}}
 
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

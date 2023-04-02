@@ -38,11 +38,37 @@ class MailController extends Controller
 
         ];
 
+        if (isset($orden->customerName)) {
+            
+            $destinatarios[]=[$orden->customerName];
+        }
+
+        if (isset($orden->customerEmail)) {
+            
+            $destinatarios[]=[$orden->customerEmail];
+        }
+
+        if (isset($orden->customerEmail2)) {
+            
+            $destinatarios[]=[$orden->customerEmail2];
+        }
+
+        if (isset($orden->saleRepEmail)) {
+            
+            $destinatarios[]=[$orden->saleRepEmail];
+        }
+
+
+
+
         $reporte = Excel::raw(new OrderExport($id), \Maatwebsite\Excel\Excel::XLSX);
 
-        Mail::to("cedenojlj@gmail.com")->send(new DemoEmail($emailData, $reporte));
 
-        dd("all is ready");
+        foreach ($destinatarios as $value) {
+            
+            Mail::to($value)->send(new DemoEmail($emailData, $reporte));
+        }        
+
     }
 
 
@@ -58,7 +84,7 @@ class MailController extends Controller
 
         $customer= Customer::find($orden->customer_id)->name;
        
-        $tittle = 'Order Created ' .$numberOrder; 
+        $tittle = 'Rebate Order Created ' .$numberOrder; 
        
         $emailData=[
 
@@ -69,11 +95,51 @@ class MailController extends Controller
 
         ];
 
+        unset($destinatarios);
+
+        if (isset($orden->customerName)) {
+            
+            $destinatarios[]=[$orden->customerName];
+        }
+
+        if (isset($orden->customerEmail)) {
+            
+            $destinatarios[]=[$orden->customerEmail];
+        }
+
+        if (isset($orden->customerEmail2)) {
+            
+            $destinatarios[]=[$orden->customerEmail2];
+        }
+
+        if (isset($orden->saleRepEmail)) {
+            
+            $destinatarios[]=[$orden->saleRepEmail];
+        }
+
+
+
+
         $reporte = Excel::raw(new RebateExport($id), \Maatwebsite\Excel\Excel::XLSX);
 
-        Mail::to("cedenojlj@gmail.com")->send(new RebateMail($emailData, $reporte));
 
-        dd("REBATE all is ready");
+        foreach ($destinatarios as $value) {
+            
+           
+        Mail::to($value)->send(new RebateMail($emailData, $reporte));
+
+        }    
+
+
+
+
+
+
+        //dd("REBATE all is ready");
+
+        //return view('home');
+
+
     }
 
 

@@ -115,9 +115,9 @@ Route::get('export-rebate/{id}', [OrderController::class,'rebate']);
 // Enviando correos con los archivos de excel
 
 
-Route::get('sendmail/{id}', [MailController::class,'index']);
+Route::get('sendmail/{id}', [MailController::class,'index'])->name('sendmail');
 
-Route::get('rebatemail/{id}', [MailController::class,'rebate']);
+Route::get('rebatemail/{id}', [MailController::class,'rebate'])->name('rebatemail');
 
 
 

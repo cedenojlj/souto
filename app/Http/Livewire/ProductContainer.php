@@ -101,9 +101,9 @@ class ProductContainer extends Component
 
         unset($value);
 
-       //dd($this->items);
+        //dd($this->items);
 
-        
+
     }
 
     public function saveItem()
@@ -114,7 +114,7 @@ class ProductContainer extends Component
 
         //dd($producto);
 
-       // dd($this->items);
+        // dd($this->items);
 
         if (isset($producto['id'])) {
 
@@ -132,9 +132,9 @@ class ProductContainer extends Component
 
             $this->mensajex = 'Product added or updated successfully';
 
-         // dd($this->items);
+            // dd($this->items);
 
-           
+
 
             # code...
         } else {
@@ -163,22 +163,22 @@ class ProductContainer extends Component
     public function saveItemBundle()
     {
         // dd('dentro de bundle');
-       $this->mensajex = '';
+        $this->mensajex = '';
 
         //dd($bundles);
 
-        if (isset($this->idProductBundle)) {  
-            
+        if (isset($this->idProductBundle)) {
+
             //dd($this->items);
-            
+
             $bundles = Bundle::where('numBundle', $this->idProductBundle)->where('user_id', Auth::id())->get();
 
             //dd($bundles);
 
-           
+
             foreach ($bundles as $bundle) {
 
-                $productBundle= Product::find($bundle['product_id']);
+                $productBundle = Product::find($bundle['product_id']);
 
                 $this->items[] = [
 
@@ -195,7 +195,7 @@ class ProductContainer extends Component
 
             //dd($this->items);
             unset($bundle);
-            $productBundle='';
+            $productBundle = '';
 
 
             $this->mensajex = 'Product added or updated successfully';
@@ -355,7 +355,18 @@ class ProductContainer extends Component
 
 
             $this->mensajex = 'Product added or updated successfully';
+
+            return redirect()->to('/checkout');
+            
         }
+
+
+
+
+
+
+
+
     }
 
 

@@ -11,6 +11,16 @@ use Illuminate\Support\Str;
 use App\Models\Ordersdetail;
 use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Support\Facades\Mail;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\OrderExport;
+use App\Exports\RebateExport;
+use App\Mail\DemoEmail;
+use App\Mail\RebateMail;
+
+
+
+
 class CheckOut extends Component
 {
 
@@ -96,6 +106,8 @@ class CheckOut extends Component
     public function submit()
     {
         $this->validate();
+
+        $total=0;
  
         // Execution doesn't reach here if validation fails.
 
@@ -209,8 +221,16 @@ class CheckOut extends Component
 
              $this->general= 1; // para ocultar los demas campos y dejar solo el reporte
                                 // de orden creada
+          
+            $this->indexMail($order->id);
 
-             //$this->reset();
+
+             if ($this->rebate > 0) {
+
+                $this->rebateMail($order->id);
+                
+             }
+
 
              $this->status = 'Order Created Successfully';
         }
@@ -221,9 +241,139 @@ class CheckOut extends Component
 
 
 
+    public function indexMail($id)
+    {
+       
+        $orden= Order::find($id);
+
+        $numberOrder="#".$orden->created_at->format('Ymdhis');
+
+        $dateOrder="#".$orden->created_at->format('m-d-Y');
+
+        $customer= Customer::find($orden->customer_id)->name;
+       
+        $tittle = 'Order Created ' .$numberOrder; 
+       
+        $emailData=[
+
+            'title'=> $tittle,
+            'body'=>'',
+            'dateOrder' => $dateOrder,
+            'customer' => $customer,
+
+        ];
+
+        if (isset(Auth::user()->emailuser)) {
+            
+            $destinatarios[]=Auth::user()->emailuser;
+        }
+
+        if (isset($orden->customerEmail)) {
+            
+            $destinatarios[]=$orden->customerEmail;
+        }
+
+        if (isset($orden->customerEmail2)) {
+            
+            $destinatarios[]=$orden->customerEmail2;
+        }
+
+        if (isset($orden->saleRepEmail)) {
+            
+            $destinatarios[]=$orden->saleRepEmail;
+        }
+
+        //dd($destinatarios);
+
+
+        $reporte = Excel::raw(new OrderExport($id), \Maatwebsite\Excel\Excel::XLSX);
+
+
+        foreach ($destinatarios as $value) {
+            
+            Mail::to($value)->send(new DemoEmail($emailData, $reporte));
+        }        
+
+    }
+
+
+
+    public function rebateMail($id)
+    {
+       
+        $orden= Order::find($id);
+
+        $numberOrder="#".$orden->created_at->format('Ymdhis');
+
+        $dateOrder="#".$orden->created_at->format('m-d-Y');
+
+        $customer= Customer::find($orden->customer_id)->name;
+       
+        $tittle = 'Order Created ' .$numberOrder; 
+       
+        $emailData=[
+
+            'title'=> $tittle,
+            'body'=>'',
+            'dateOrder' => $dateOrder,
+            'customer' => $customer,
+            'rebate' => $orden->rebate,
+            'vendor' => Auth::user()->name,
+
+        ];
+
+
+
+        if (isset(Auth::user()->emailuser)) {
+            
+            $destinatarios[]=Auth::user()->emailuser;
+        }
+
+        if (isset($orden->customerEmail)) {
+            
+            $destinatarios[]=$orden->customerEmail;
+        }
+
+        if (isset($orden->customerEmail2)) {
+            
+            $destinatarios[]=$orden->customerEmail2;
+        }
+
+        if (isset($orden->saleRepEmail)) {
+            
+            $destinatarios[]=$orden->saleRepEmail;
+        }
+
+
+
+        $reporte = Excel::raw(new RebateExport($id), \Maatwebsite\Excel\Excel::XLSX);
+
+
+        foreach ($destinatarios as $value) {
+            
+           
+        Mail::to($value)->send(new RebateMail($emailData, $reporte));
+
+        }    
+
+
+
+
+
+
+        //dd("REBATE all is ready");
+
+        //return view('home');
+
+
+    }
+
+
 
     public function render()
     {
         return view('livewire.check-out');
     }
 }
+
+

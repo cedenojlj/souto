@@ -57,7 +57,7 @@ class RebateMail extends Mailable
     {
         return [
 
-            Attachment::fromData(fn () => $this->reporte, 'rebate.xlsx'),
+            // Attachment::fromData(fn () => $this->reporte, 'rebate.xlsx'),
         ];
     }
 }
