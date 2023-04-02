@@ -16,13 +16,24 @@
         
     @endif
 
+    <div class="text-center">
+        <div wire:loading.inline-flex wire:target="submit">
+
+            <button class="btn btn-primary" type="button" disabled>
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                Processing...
+            </button>
+            
+        </div>
+    </div>  
+
     <div class="Container">
 
        @if (!$general)           
       
             {{-- search  --}}
 
-            <div class="row mb-4">           
+            <div class="row mb-4" wire:loading.remove wire:target="submit">           
 
                 <div class="col-md-6">                
                     
@@ -36,9 +47,9 @@
                 
                 </div> --}}
             </div> 
+               
 
-
-            <form wire:submit.prevent="submit">
+            <form wire:submit.prevent="submit" wire:loading.remove wire:target="submit">
 
                 @if (!empty($searchx))
 
@@ -211,7 +222,7 @@
 
         @else
 
-            <div class="row mt-3">
+            <div class="row mt-3" wire:loading.remove wire:target="submit">
 
                 <h5>Number Order: #{{ $orderDate->format('Ymdhis') }}</h5>
                 <h5>Date Order: {{$orderDate->format('m-d-Y')}}</h5>

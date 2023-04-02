@@ -231,6 +231,7 @@ class ProductContainer extends Component
     public function save()
     {
 
+        
 
         session()->forget('carrito');
 
@@ -357,7 +358,7 @@ class ProductContainer extends Component
             $this->mensajex = 'Product added or updated successfully';
 
             return redirect()->to('/checkout');
-            
+
         }
 
 

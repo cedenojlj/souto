@@ -1,4 +1,6 @@
 <div>
+
+   
         
     <h5>{{Auth::user()->name}}</h5>  
 
@@ -198,13 +200,29 @@
                 </div>
 
             @endif
+            
+                
 
+            <div class="text-center">
+                <div wire:loading.inline-flex wire:target="save">
+
+                    <button class="btn btn-primary" type="button" disabled>
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        Processing......
+                    </button>
+                    
+                </div>
+            </div>             
+
+                
                
-            <div class="row mt-4">
+            <div class="row mt-4" wire:loading.remove wire:target="save">
 
               <div class="col-1">
 
                 <button type="button" wire:click="save" name="" id="" class="btn btn-primary">checkout</button>
+
+                
 
               </div>
 
@@ -224,7 +242,7 @@
             </div>          
             
 
-                <div class="table-responsive">
+            <div class="table-responsive" wire:loading.remove wire:target="save">
 
                     <table class="table table-sm">
 
@@ -346,13 +364,11 @@
 
                     </table>
 
-                </div>
+            </div>
 
             
 
             
-
-
 </div>
 
 
