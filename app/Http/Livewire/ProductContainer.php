@@ -134,6 +134,7 @@ class ProductContainer extends Component
 
             // dd($this->items);
 
+            $this->showFormItems = false;
 
 
             # code...
@@ -156,7 +157,9 @@ class ProductContainer extends Component
 
     public function openFormItem()
     {
+        $this->mensajex = '';
         $this->showFormItems = true;
+        $this->showFormItemsBundle = false;
     }
 
 
@@ -200,6 +203,8 @@ class ProductContainer extends Component
 
             $this->mensajex = 'Product added or updated successfully';
 
+            $this->showFormItemsBundle = false;
+
             # code...
         } else {
 
@@ -219,7 +224,9 @@ class ProductContainer extends Component
 
     public function openFormItemBundle()
     {
+        $this->mensajex = '';
         $this->showFormItemsBundle = true;
+        $this->showFormItems = false;
     }
 
 
