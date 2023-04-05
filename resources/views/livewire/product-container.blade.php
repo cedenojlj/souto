@@ -60,9 +60,15 @@
             
                             <div class="card-body">                        
                                 
-                                <h5>{{Auth::user()->name}}</h5>
+                                <h5>{{Auth::user()->name}}</h5>                                          
                                 
                                 <livewire:check-out />
+
+                                @if ($showBotonRetroceso)
+
+                                    <button type="button" wire:click="regresar" name="" id="" class="btn btn-primary">Back</button>   
+                                    
+                                @endif
                                 
                             </div>
                         </div>
@@ -70,7 +76,7 @@
                 </div>
 
 
-                <div class="row mt-4">
+               {{--  <div class="row mt-4">
 
                     <div class="col-1">
     
@@ -78,7 +84,7 @@
                         
                     </div>                      
                     
-                </div>    
+                </div>     --}}
                 
             @endif
 
@@ -254,11 +260,11 @@
                 
                 @if ($mostrarItems)
 
-                    <div class="row mt-4" wire:loading.remove wire:target="save">
+                    <div class="row mt-4 mb-2" wire:loading.remove wire:target="save">
 
                     <div class="col-1">
 
-                        <button type="button" wire:click="save" name="" id="" class="btn btn-primary">checkout</button>
+                        <button type="button" wire:click="save" name="" id="" class="btn btn-primary">Checkout</button>
 
                         
 
@@ -306,107 +312,115 @@
                     
                                     
 
-                                        
+                                    @if (!empty($items))                                       
+                                    
 
                                         @foreach ($items as $key => $value)
-                    
-                                    
-                                    {{--  <tr class="{{$control == $key ? $status:''}}">   --}}
+                        
+                                        
+                                            {{--  <tr class="{{$control == $key ? $status:''}}">   --}}
 
-                                        <tr class="{{empty($indicador[$key]) ? '': $indicador[$key]}}"> 
+                                            <tr class="{{empty($indicador[$key]) ? '': $indicador[$key]}}"> 
+                                                
+                                                
+                        
+                                                    {{-- @livewire('product-item', ['product' => $value], key($key)) --}}
+                        
+                                                {{--  <td> <button wire:click="agregar" type="button" class="btn btn-primary btn-sm">+</button> 
+                                                    <button wire:click="eliminar" type="button" class="btn btn-danger btn-sm">-</button> </th>     --}}
+                                        
+                                                    <td>
+                                                        <input wire:model="amount.{{$key}}" 
+                                                        id="amount" type="number"  
+                                                        class="form-control @error('amount.'.$key) is-invalid @enderror" 
+                                                        name="amount" required autofocus>
+                                                        
+                                                        <span class="error">
+                                                            @error('amount.'.$key) {{ $message }} @enderror
+                                                        </span>
+                        
+                                                        {{-- <span>
+                                                            {{ $control == $key ? $mensajex: ''}}
+                                                        </span> --}}
+                                                        
+                                                    </td>
+                                                    {{-- <td>{{$value[itemnumber}}</td> --}}
+                                                    <td>{{$value['description']}}</td>
+                                                    <td>{{$value['upc']}}</td>
+                                                    <td>{{$value['pallet']}}</td>
+                                                    {{-- <td>{{$value['price']}}</td> --}}
+
+                                                    <td><input wire:model="prices.{{$key}}" 
+                                                        id="prices" type="number" 
+                                                        class="form-control @error('prices.'.$key) is-invalid @enderror" name="prices" >
+                                                    
+                                                        <span class="error">
+                                                            @error('prices.'.$key) {{ $message }} @enderror
+                                                        </span>
+                                                    
+                                                    </td>
+                        
+                        
+                                                    <td><input wire:model="notes.{{$key}}" 
+                                                        id="notes" type="number" 
+                                                        class="form-control @error('notes.'.$key) is-invalid @enderror" name="notes" >
+                                                    
+                                                        <span class="error">
+                                                            @error('notes.'.$key) {{ $message }} @enderror
+                                                        </span>
+                                                    
+                                                    </td>
+                        
+                        
+                                                    {{-- <td>{{!empty($notes[$key])? $value['price'] - $notes[$key] :$value['price']}}</td> --}}
+
+                                                    <td>{{!empty($notes[$key])? (float) $prices[$key] - (float) $notes[$key] :(float) $prices[$key]}}</td>
+                        
+                                            
+                                                    <td><input wire:model="qtyone.{{$key}}" 
+                                                        id="qtyone" type="number" 
+                                                        class="form-control @error('qtyone.'.$key) is-invalid @enderror" name="qtyone" required>
+                                                    
+                                                        
+                                                        <span class="error">
+                                                            @error('qtyone.'.$key) {{ $message }} @enderror
+                                                        </span>
+                        
+                                                    </td>
+                                            
+                                                    <td><input wire:model="qtytwo.{{$key}}"  
+                                                        id="qtytwo" type="number" 
+                                                        class="form-control @error('qtytwo.'.$key) is-invalid @enderror" name="qtytwo">
+                                                    
+                                                        <span class="error">
+                                                            @error('qtytwo.'.$key) {{ $message }} @enderror
+                                                        </span>
+                        
+                                                    </td>
+                                            
+                                                    <td><input wire:model="qtythree.{{$key}}" 
+                                                        id="qtythree" type="number"  
+                                                        class="form-control @error('qtythree.'.$key) is-invalid @enderror" name="qtythree">
+                                                    
+                                                        <span class="error">
+                                                            @error('qtythree.'.$key) {{ $message }} @enderror
+                                                        </span>
+                        
+                                                    </td>     
                                             
                                             
-                    
-                                                {{-- @livewire('product-item', ['product' => $value], key($key)) --}}
-                    
-                                            {{--  <td> <button wire:click="agregar" type="button" class="btn btn-primary btn-sm">+</button> 
-                                                <button wire:click="eliminar" type="button" class="btn btn-danger btn-sm">-</button> </th>     --}}
-                                    
-                                                <td>
-                                                    <input wire:model="amount.{{$key}}" 
-                                                    id="amount" type="number"  
-                                                    class="form-control @error('amount.'.$key) is-invalid @enderror" 
-                                                    name="amount" required autofocus>
-                                                    
-                                                    <span class="error">
-                                                        @error('amount.'.$key) {{ $message }} @enderror
-                                                    </span>
-                    
-                                                    {{-- <span>
-                                                        {{ $control == $key ? $mensajex: ''}}
-                                                    </span> --}}
-                                                    
-                                                </td>
-                                                {{-- <td>{{$value[itemnumber}}</td> --}}
-                                                <td>{{$value['description']}}</td>
-                                                <td>{{$value['upc']}}</td>
-                                                <td>{{$value['pallet']}}</td>
-                                                {{-- <td>{{$value['price']}}</td> --}}
-
-                                                <td><input wire:model="prices.{{$key}}" 
-                                                    id="prices" type="number" 
-                                                    class="form-control @error('prices.'.$key) is-invalid @enderror" name="prices" >
-                                                
-                                                    <span class="error">
-                                                        @error('prices.'.$key) {{ $message }} @enderror
-                                                    </span>
-                                                
-                                                </td>
-                    
-                    
-                                                <td><input wire:model="notes.{{$key}}" 
-                                                    id="notes" type="number" 
-                                                    class="form-control @error('notes.'.$key) is-invalid @enderror" name="notes" >
-                                                
-                                                    <span class="error">
-                                                        @error('notes.'.$key) {{ $message }} @enderror
-                                                    </span>
-                                                
-                                                </td>
-                    
-                    
-                                                {{-- <td>{{!empty($notes[$key])? $value['price'] - $notes[$key] :$value['price']}}</td> --}}
-
-                                                <td>{{!empty($notes[$key])? (float) $prices[$key] - (float) $notes[$key] :(float) $prices[$key]}}</td>
-                    
-                                        
-                                                <td><input wire:model="qtyone.{{$key}}" 
-                                                    id="qtyone" type="number" 
-                                                    class="form-control @error('qtyone.'.$key) is-invalid @enderror" name="qtyone" required>
-                                                
-                                                    
-                                                    <span class="error">
-                                                        @error('qtyone.'.$key) {{ $message }} @enderror
-                                                    </span>
-                    
-                                                </td>
-                                        
-                                                <td><input wire:model="qtytwo.{{$key}}"  
-                                                    id="qtytwo" type="number" 
-                                                    class="form-control @error('qtytwo.'.$key) is-invalid @enderror" name="qtytwo">
-                                                
-                                                    <span class="error">
-                                                        @error('qtytwo.'.$key) {{ $message }} @enderror
-                                                    </span>
-                    
-                                                </td>
-                                        
-                                                <td><input wire:model="qtythree.{{$key}}" 
-                                                    id="qtythree" type="number"  
-                                                    class="form-control @error('qtythree.'.$key) is-invalid @enderror" name="qtythree">
-                                                
-                                                    <span class="error">
-                                                        @error('qtythree.'.$key) {{ $message }} @enderror
-                                                    </span>
-                    
-                                                </td>     
-                                        
-                                        
-                                        </tr> 
-                    
-                                        
-                    
+                                            </tr>                            
+                                            
+                        
                                         @endforeach  
+                                    
+                                    @else                                       
+
+                                        <h3> No items </h3>
+
+                                        
+                                    @endif
+                                      
                                                                 
                                         
                                     </tbody>

@@ -58,6 +58,8 @@ class OrderExport implements FromView, ShouldAutoSize, WithDrawings
 
        $date3= Carbon::createFromFormat('Y-m-d', $user->date3)->format('m/d/Y'); 
 
+       $numeroRebate = Auth::id().$orden->created_at->format('ymd');
+
        
         
         
@@ -72,6 +74,7 @@ class OrderExport implements FromView, ShouldAutoSize, WithDrawings
             'date1'=> $date1,
             'date2'=> $date2,
             'date3'=> $date3,
+            'numeroRebate' => $numeroRebate
 
         ]);
     }

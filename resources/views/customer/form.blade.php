@@ -19,8 +19,8 @@
         </div>
 
         <div class="form-group">
-            {{ Form::label('emailRep') }}
-            {{ Form::text('emailRep', $customer->emailRep, ['class' => 'form-control' . ($errors->has('emailRep') ? ' is-invalid' : ''), 'placeholder' => 'EmailRep']) }}
+            {{ Form::label('Email Sales Rep') }}
+            {{ Form::text('emailRep', $customer->emailRep, ['class' => 'form-control' . ($errors->has('emailRep') ? ' is-invalid' : ''), 'placeholder' => 'Email Sales Rep']) }}
             {!! $errors->first('emailRep', '<div class="invalid-feedback">:message</div>') !!}
         </div>       
 
@@ -47,3 +47,4 @@
         <button type="submit" class="btn btn-primary">Submit</button>
     </div>
 </div>
+

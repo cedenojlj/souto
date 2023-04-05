@@ -40,7 +40,7 @@
                             <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Username') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $user->email }}" required autocomplete="email">
+                                <input id="email" type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $user->email }}" required autocomplete="email" {{Auth::user()->rol == 'user'?'disabled':''}}>
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -54,7 +54,7 @@
                             <label for="emailuser" class="col-md-4 col-form-label text-md-end">{{ __('Email') }}</label>
 
                             <div class="col-md-6">
-                                <input id="emailuser" type="text" class="form-control @error('emailuser') is-invalid @enderror" name="emailuser" value="{{ $user->emailuser }}" required autocomplete="emailuser">
+                                <input id="emailuser" type="text" class="form-control @error('emailuser') is-invalid @enderror" name="emailuser" value="{{ $user->emailuser }}" required autocomplete="emailuser" {{Auth::user()->rol == 'user'?'disabled':''}}>
 
                                 @error('emailuser')
                                     <span class="invalid-feedback" role="alert">
@@ -113,7 +113,7 @@
                             <label for="date1" class="col-md-4 col-form-label text-md-end">Date1</label>
 
                             <div class="col-md-6">
-                                <input id="date1" type="date" class="form-control" name="date1" required value="{{$user->date1}}">
+                                <input id="date1" type="date" class="form-control" name="date1" required value="{{$user->date1}}" {{Auth::user()->rol == 'user'?'disabled':''}}>
                             </div>
                         </div>
 
@@ -121,7 +121,7 @@
                             <label for="date2" class="col-md-4 col-form-label text-md-end">Date2</label>
 
                             <div class="col-md-6">
-                                <input id="date2" type="date" class="form-control" name="date2" required value="{{$user->date2}}">
+                                <input id="date2" type="date" class="form-control" name="date2" required value="{{$user->date2}}" {{Auth::user()->rol == 'user'?'disabled':''}}>
                             </div>
                         </div>
 
@@ -129,7 +129,7 @@
                             <label for="date3" class="col-md-4 col-form-label text-md-end">Date3</label>
 
                             <div class="col-md-6">
-                                <input id="date3" type="date" class="form-control" name="date3" required value="{{$user->date3}}">
+                                <input id="date3" type="date" class="form-control" name="date3" required value="{{$user->date3}}" {{Auth::user()->rol == 'user'?'disabled':''}}>
                             </div>
                         </div>
 

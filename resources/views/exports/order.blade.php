@@ -1,5 +1,5 @@
 
-
+    <p>-</p>
     <table class="table">
        
         <tbody>
@@ -38,7 +38,7 @@
         <th style="background-color: #999793;border: 1px solid #000000;"><strong>   Scan Item UPC </strong>  </th>
         <th style="background-color: #999793;border: 1px solid #000000;"><strong>   Cases per Pallet </strong>  </th>
         <th style="background-color: #999793;border: 1px solid #000000;"><strong>   Food Show Deal </strong>  </th>
-        <th style="background-color: #fcbf43;border: 1px solid #000000;"><strong>   notes </strong>  </th>
+        <th style="background-color: #fcbf43;border: 1px solid #000000;"><strong>   Notes </strong>  </th>
 
         <th style="background-color: #999793;border: 1px solid #000000;"><strong>   finalprice </strong>  </th>
         <th style="background-color: #fcbf43;border: 1px solid #000000;"><strong>   {{$date1}} </strong>  </th>
@@ -79,9 +79,16 @@
 <table class="table">
        
     <tbody>
+
+        <tr>            
+            <th style="font-size:14px"> <strong>Rebate Number #</strong></th>
+            <td style="font-size:14px"><strong>{{$numeroRebate}}</strong></td>  
+            
+        </tr>    
+
         <tr>            
             <th style="font-size:14px"> <strong>Rebate #</strong></th>
-            <td style="font-size:14px"><strong>{{$orden->rebate}}</strong></td>  
+            <td style="font-size:14px"><strong>{{"$ ". $orden->rebate}}</strong></td>  
             
         </tr>    
         <tr>

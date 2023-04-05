@@ -109,6 +109,8 @@ class CheckOut extends Component
         //session()->forget('carrito');
 
        // dd('listo');
+
+       $this->emit('ocultar');
        
         $this->validate();
 
@@ -201,7 +203,8 @@ class CheckOut extends Component
 
                     $ordersdetail->order_id = $this->lastId;
                     $ordersdetail->product_id =  $item['id'];
-                    $ordersdetail->name =  $item['name'];
+                    // $ordersdetail->name =  $item['name'];
+                    $ordersdetail->name =  $producto->description;
                     $ordersdetail->itemnumber =  $item['itemnumber'];
 
                     $ordersdetail->upc =  $producto->upc;

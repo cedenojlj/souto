@@ -55,7 +55,7 @@
                             <td>
                                 <form action="{{route('users.destroy', $user->id)}}" method="post">
 
-                                  <a class="btn btn-primary" href="{{route('users.edit', $user->id)}}">Edit</a>
+                                  <a class="btn btn-primary" href="{{route('users.edit', $user->id)}}">{{Auth::user()->rol == 'admin'?'Edit':'View'}}</a>
 
                                   @csrf
                                   @method('DELETE')

@@ -33,7 +33,7 @@
       
             {{-- search  --}}
 
-            <div class="row mb-4" wire:loading.remove wire:target="submit">           
+            <div class="row mb-4 mt-2" wire:loading.remove wire:target="submit">           
 
                 <div class="col-md-6">                
                     
@@ -205,7 +205,7 @@
 
                     {{-- submit  --}}
 
-                    <div class="row mb-0">
+                    <div class="row mb-3">
 
                         <div class="col-md-6">
 
@@ -224,7 +224,8 @@
 
             <div class="row mt-3" wire:loading.remove wire:target="submit">
 
-                <h5>Number Order: #{{ $orderDate->format('Ymdhis') }}</h5>
+                {{-- <h5>Number Order: #{{ $orderDate->format('Ymdhis') }}</h5> --}}
+                <h5>Order: <a href="{{url('export-order',[$lastId])}}" class="btn btn-primary">{{ $Customer->name . " - ". Auth::user()->name . " .xlsx" }}</a> </h5>
                 <h5>Date Order: {{$orderDate->format('m-d-Y')}}</h5>
                
                 <h5>Total Order: {{'$ ' . $total}}</h5>

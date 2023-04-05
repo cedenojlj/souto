@@ -73,6 +73,11 @@ class ProductContainer extends Component
 
     public $showGeneral = true;
 
+    public $showBotonRetroceso = true;
+
+
+    protected $listeners = ['ocultar' => 'ocultar'];
+
 
     protected $rules = [
 
@@ -171,6 +176,7 @@ class ProductContainer extends Component
     {
         $this->showFormItems = false;
         $this->mensajex = '';
+        $this->mostrarItems = true;
     }
 
 
@@ -245,6 +251,8 @@ class ProductContainer extends Component
         $this->showFormItemsBundle = false;
 
         $this->mensajex = '';
+
+        $this->mostrarItems = true;
     }
 
     public function openFormItemBundle()
@@ -412,6 +420,11 @@ class ProductContainer extends Component
 
         $this->showGeneral=true;
     }
+
+    public function ocultar()
+    {
+        $this->showBotonRetroceso=false;
+    }
   
     public function render()
     {
@@ -426,6 +439,6 @@ class ProductContainer extends Component
     }
 }
 
-
+ 
 
 

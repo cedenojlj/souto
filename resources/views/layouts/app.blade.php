@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'SoutoFoods') }}</title>
+    <title>{{ config('app.name', 'SoutoFoodsFestival') }}</title>
 
     
 
@@ -32,7 +32,7 @@
             <div class="container">
                 <img src="{{asset('img/logo1.jpg')}}" alt="" width="50" height="60">
                 <a class="navbar-brand" href="#">
-                    {{ config('app.name', 'SoutoFoods') }}
+                    Souto Foods Festival
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -69,16 +69,21 @@
                             <a class="nav-link" href="{{ route('users.index') }}"><i class="bi bi-person"></i> Vendors</a>
                         </li>
 
+                        @if (Auth::user()->rol == 'admin')
+                            
+                       
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('customers.index') }}"> <i class="bi bi-person-check"></i> Customers</a>
                         </li>
+
+                         @endif
 
                       {{--  <li class="nav-item">
                             <a class="nav-link" href="{{ route('products.index') }}"> Items</a>
                         </li>  --}}
 
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('orders') }}"> <i class="bi bi-clipboard-data"></i> Order</a>
+                            <a class="nav-link" href="{{ route('orders') }}"> <i class="bi bi-clipboard-data"></i> Orders</a>
                         </li>
 
                        {{--  
@@ -91,9 +96,9 @@
                         @endif --}}
                         
 
-                         <li class="nav-item">
+                        {{--  <li class="nav-item">
                             <a class="nav-link" href="{{ route('cartlist') }}"><i class="bi bi-cart-check"></i> Cart</a>
-                        </li>   
+                        </li>  --}}  
 
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
