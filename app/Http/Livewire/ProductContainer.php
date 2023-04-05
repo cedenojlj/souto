@@ -69,6 +69,10 @@ class ProductContainer extends Component
 
     public $mostrarItems = true;
 
+    public $showCheckout = false;
+
+    public $showGeneral = true;
+
 
     protected $rules = [
 
@@ -263,7 +267,9 @@ class ProductContainer extends Component
 
         
 
-        session()->forget('carrito');
+       //session()->forget('carrito');
+
+
 
         foreach ($this->items as $key => $value) {
 
@@ -387,19 +393,25 @@ class ProductContainer extends Component
 
             $this->mensajex = 'Product added or updated successfully';
 
-            return redirect()->to('/checkout');
+            $this->showCheckout=true;
+
+            $this->showGeneral=false;
+
+            $this->mensajex = '';
+
+
+           // return redirect()->to('/checkout');
 
         }
 
-
-
-
-
-
-
-
     }
 
+    public function regresar()
+    {
+        $this->showCheckout=false;
+
+        $this->showGeneral=true;
+    }
   
     public function render()
     {

@@ -105,6 +105,11 @@ class CheckOut extends Component
 
     public function submit()
     {
+       
+        //session()->forget('carrito');
+
+       // dd('listo');
+       
         $this->validate();
 
         $total=0;
