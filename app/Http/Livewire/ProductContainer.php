@@ -65,6 +65,8 @@ class ProductContainer extends Component
 
     public $showFormItemsBundle = false;
 
+    public $mostrarItems = true;
+
 
     protected $rules = [
 
@@ -80,8 +82,9 @@ class ProductContainer extends Component
 
     public function mount()
     {
-        $productos = Product::all();
+        $productos = Product::where('user_id', Auth::user()->id)->orderBy('prioridad', 'asc')->get();
 
+        //dd($productos);
         //$this->listaProductos = [];
 
         foreach ($productos as $key => $value) {
@@ -136,6 +139,8 @@ class ProductContainer extends Component
 
             $this->showFormItems = false;
 
+            $this->mostrarItems = true;
+
 
             # code...
         } else {
@@ -157,9 +162,11 @@ class ProductContainer extends Component
 
     public function openFormItem()
     {
+        $this->mostrarItems = false;
         $this->mensajex = '';
         $this->showFormItems = true;
         $this->showFormItemsBundle = false;
+       
     }
 
 
@@ -179,9 +186,9 @@ class ProductContainer extends Component
             //dd($bundles);
 
 
-            foreach ($bundles as $bundle) {
-
-                $productBundle = Product::find($bundle['product_id']);
+            foreach ($bundles as $bundle) {               
+              
+                $productBundle = Product::where('itemnumber', $bundle['itemnumber'])->first();
 
                 $this->items[] = [
 
@@ -191,7 +198,7 @@ class ProductContainer extends Component
                     'description' => $productBundle['description'],
                     'upc' => $productBundle['upc'],
                     'pallet' => $productBundle['pallet'],
-                    'price' => $productBundle['price'],
+                    'price' => $bundle['priceBundle'],
                 ];
                 # code...
             }
@@ -204,6 +211,8 @@ class ProductContainer extends Component
             $this->mensajex = 'Product added or updated successfully';
 
             $this->showFormItemsBundle = false;
+
+            $this->mostrarItems = true;
 
             # code...
         } else {
@@ -224,15 +233,17 @@ class ProductContainer extends Component
 
     public function openFormItemBundle()
     {
+        $this->mostrarItems = false;
         $this->mensajex = '';
         $this->showFormItemsBundle = true;
         $this->showFormItems = false;
+       
     }
 
 
     public function updatedSearch()
     {
-        $this->listaProductos = Product::where('name', 'LIKE', '%' . $this->search . '%')->orWhere('itemnumber', 'LIKE', '%' . $this->search . '%')->get();
+        $this->listaProductos = Product::where('name', 'LIKE', '%' . $this->search . '%')->where('user_id', Auth::id())->orWhere('itemnumber', 'LIKE', '%' . $this->search . '%')->where('user_id', Auth::id())->get();
     }
 
     public function save()
@@ -555,3 +566,7 @@ class ProductContainer extends Component
         ]);
     }
 }
+
+
+
+

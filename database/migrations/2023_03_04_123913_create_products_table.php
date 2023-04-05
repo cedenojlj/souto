@@ -13,13 +13,15 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string('itemnumber');
+            //$table->string('itemnumber');
+            $table->string('itemnumber')->index();
             $table->string('name');
             $table->string('description');
             $table->string('upc');
-            $table->integer('pallet');
+            $table->integer('pallet');                     
             $table->float('price', 8, 2)->default(0);
             $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->integer('prioridad')->default(5);  
             $table->timestamps();
         });
     }
@@ -32,3 +34,4 @@ return new class extends Migration
         Schema::dropIfExists('products');
     }
 };
+

@@ -39,6 +39,16 @@
                   
               @endif --}}
 
+            <div class="text-center mb-4">
+                <div wire:loading.inline-flex>
+
+                    <button class="btn btn-primary" type="button" disabled>
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        Processing......
+                    </button>
+                    
+                </div>
+            </div>      
 
             {{-- Add Form Items   --}}
 
@@ -203,19 +213,14 @@
             
                 
 
-            <div class="text-center">
-                <div wire:loading.inline-flex wire:target="save">
-
-                    <button class="btn btn-primary" type="button" disabled>
-                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                        Processing......
-                    </button>
                     
-                </div>
-            </div>             
 
-                
+            {{-- <div wire:loading.inline-flex wire:target="save">    --}}
                
+                    
+            
+            @if ($mostrarItems)
+
             <div class="row mt-4" wire:loading.remove wire:target="save">
 
               <div class="col-1">
@@ -239,134 +244,134 @@
               </div>
 
 
-            </div>          
-            
+            </div>  
 
             <div class="table-responsive" wire:loading.remove wire:target="save">
 
                     <table class="table table-sm">
 
-                        <thead>
-                            <tr>
-                                <th scope="col">Order Qty</th>
-                                {{-- <th scope="col">Item text</th> --}}
-                                <th scope="col">Description</th>
-                                <th scope="col">Scan Item UPC</th>
-                                <th scope="col">Cases per Pallet</th>
-                                <th scope="col">Food Show Deal</th>
-                                <th scope="col">Notes</th>
-                                <th scope="col">Final Price</th>
-                                {{-- <th scope="col">{{Auth::user()->date1}}</th>
-                                <th scope="col">{{Auth::user()->date2}}</th>
-                                <th scope="col">{{Auth::user()->date3}}</th>  --}} 
-                                <th scope="col">{{$fecha1}}</th>
-                                <th scope="col">{{$fecha2}}</th>
-                                <th scope="col">{{$fecha3}}</th> 
+                            <thead>
+                                <tr>
+                                    <th scope="col">Order Qty</th>
+                                    {{-- <th scope="col">Item text</th> --}}
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Scan Item UPC</th>
+                                    <th scope="col">Cases per Pallet</th>
+                                    <th scope="col">Food Show Deal</th>
+                                    <th scope="col">Notes</th>
+                                    <th scope="col">Final Price</th>
+                                    {{-- <th scope="col">{{Auth::user()->date1}}</th>
+                                    <th scope="col">{{Auth::user()->date2}}</th>
+                                    <th scope="col">{{Auth::user()->date3}}</th>  --}} 
+                                    <th scope="col">{{$fecha1}}</th>
+                                    <th scope="col">{{$fecha2}}</th>
+                                    <th scope="col">{{$fecha3}}</th> 
 
-                            </tr>
-                        </thead>
-                        <tbody>
-        
-                        
-
+                                </tr>
+                            </thead>
+                            <tbody>
+            
                             
 
-                            @foreach ($items as $key => &$value)
-        
-                        
-                        {{--  <tr class="{{$control == $key ? $status:''}}">   --}}
+                                
 
-                            <tr class="{{empty($indicador[$key]) ? '': $indicador[$key]}}"> 
+                                @foreach ($items as $key => &$value)
+            
+                            
+                            {{--  <tr class="{{$control == $key ? $status:''}}">   --}}
+
+                                <tr class="{{empty($indicador[$key]) ? '': $indicador[$key]}}"> 
+                                    
+                                    
+            
+                                        {{-- @livewire('product-item', ['product' => $value], key($key)) --}}
+            
+                                    {{--  <td> <button wire:click="agregar" type="button" class="btn btn-primary btn-sm">+</button> 
+                                        <button wire:click="eliminar" type="button" class="btn btn-danger btn-sm">-</button> </th>     --}}
+                            
+                                        <td>
+                                            <input wire:model="amount.{{$key}}" 
+                                            id="amount" type="number"  
+                                            class="form-control @error('amount.'.$key) is-invalid @enderror" 
+                                            name="amount" required autofocus>
+                                            
+                                            <span class="error">
+                                                @error('amount.'.$key) {{ $message }} @enderror
+                                            </span>
+            
+                                            {{-- <span>
+                                                {{ $control == $key ? $mensajex: ''}}
+                                            </span> --}}
+                                            
+                                        </td>
+                                        {{-- <td>{{$value[itemnumber}}</td> --}}
+                                        <td>{{$value['description']}}</td>
+                                        <td>{{$value['upc']}}</td>
+                                        <td>{{$value['pallet']}}</td>
+                                        <td>{{$value['price']}}</td>
+            
+            
+                                        <td><input wire:model="notes.{{$key}}" 
+                                            id="notes" type="number" 
+                                            class="form-control @error('notes.'.$key) is-invalid @enderror" name="notes" >
+                                        
+                                            <span class="error">
+                                                @error('notes.'.$key) {{ $message }} @enderror
+                                            </span>
+                                        
+                                        </td>
+            
+            
+                                        <td>{{!empty($notes[$key])? $value['price'] - $notes[$key] :$value['price']}}</td>
+            
+                                
+                                        <td><input wire:model="qtyone.{{$key}}" 
+                                            id="qtyone" type="number" 
+                                            class="form-control @error('qtyone.'.$key) is-invalid @enderror" name="qtyone" required>
+                                        
+                                            
+                                            <span class="error">
+                                                @error('qtyone.'.$key) {{ $message }} @enderror
+                                            </span>
+            
+                                        </td>
+                                
+                                        <td><input wire:model="qtytwo.{{$key}}"  
+                                            id="qtytwo" type="number" 
+                                            class="form-control @error('qtytwo.'.$key) is-invalid @enderror" name="qtytwo">
+                                        
+                                            <span class="error">
+                                                @error('qtytwo.'.$key) {{ $message }} @enderror
+                                            </span>
+            
+                                        </td>
+                                
+                                        <td><input wire:model="qtythree.{{$key}}" 
+                                            id="qtythree" type="number"  
+                                            class="form-control @error('qtythree.'.$key) is-invalid @enderror" name="qtythree">
+                                        
+                                            <span class="error">
+                                                @error('qtythree.'.$key) {{ $message }} @enderror
+                                            </span>
+            
+                                        </td>     
                                 
                                 
-        
-                                    {{-- @livewire('product-item', ['product' => $value], key($key)) --}}
-        
-                                {{--  <td> <button wire:click="agregar" type="button" class="btn btn-primary btn-sm">+</button> 
-                                    <button wire:click="eliminar" type="button" class="btn btn-danger btn-sm">-</button> </th>     --}}
-                        
-                                    <td>
-                                        <input wire:model="amount.{{$key}}" 
-                                        id="amount" type="number"  
-                                        class="form-control @error('amount.'.$key) is-invalid @enderror" 
-                                        name="amount" required autofocus>
-                                        
-                                        <span class="error">
-                                            @error('amount.'.$key) {{ $message }} @enderror
-                                        </span>
-        
-                                        {{-- <span>
-                                            {{ $control == $key ? $mensajex: ''}}
-                                        </span> --}}
-                                        
-                                    </td>
-                                    {{-- <td>{{$value[itemnumber}}</td> --}}
-                                    <td>{{$value['description']}}</td>
-                                    <td>{{$value['upc']}}</td>
-                                    <td>{{$value['pallet']}}</td>
-                                    <td>{{$value['price']}}</td>
-        
-        
-                                    <td><input wire:model="notes.{{$key}}" 
-                                        id="notes" type="number" 
-                                        class="form-control @error('notes.'.$key) is-invalid @enderror" name="notes" >
-                                    
-                                        <span class="error">
-                                            @error('notes.'.$key) {{ $message }} @enderror
-                                        </span>
-                                    
-                                    </td>
-        
-        
-                                    <td>{{!empty($notes[$key])? $value['price'] - $notes[$key] :$value['price']}}</td>
-        
-                            
-                                    <td><input wire:model="qtyone.{{$key}}" 
-                                        id="qtyone" type="number" 
-                                        class="form-control @error('qtyone.'.$key) is-invalid @enderror" name="qtyone" required>
-                                    
-                                        
-                                        <span class="error">
-                                            @error('qtyone.'.$key) {{ $message }} @enderror
-                                        </span>
-        
-                                    </td>
-                            
-                                    <td><input wire:model="qtytwo.{{$key}}"  
-                                        id="qtytwo" type="number" 
-                                        class="form-control @error('qtytwo.'.$key) is-invalid @enderror" name="qtytwo">
-                                    
-                                        <span class="error">
-                                            @error('qtytwo.'.$key) {{ $message }} @enderror
-                                        </span>
-        
-                                    </td>
-                            
-                                    <td><input wire:model="qtythree.{{$key}}" 
-                                        id="qtythree" type="number"  
-                                        class="form-control @error('qtythree.'.$key) is-invalid @enderror" name="qtythree">
-                                    
-                                        <span class="error">
-                                            @error('qtythree.'.$key) {{ $message }} @enderror
-                                        </span>
-        
-                                    </td>     
-                            
-                            
-                            </tr> 
-        
-                            
-        
-                            @endforeach  
-                                                     
-                            
-                        </tbody>
+                                </tr> 
+            
+                                
+            
+                                @endforeach  
+                                                        
+                                
+                            </tbody>
 
                     </table>
 
             </div>
-
             
+                
+            @endif
 
             
 </div>

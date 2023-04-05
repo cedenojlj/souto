@@ -31,7 +31,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <img src="{{asset('img/logo1.jpg')}}" alt="" width="50" height="60">
-                <a class="navbar-brand" href="{{ route('home') }}">
+                <a class="navbar-brand" href="#">
                     {{ config('app.name', 'SoutoFoods') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
