@@ -8,7 +8,7 @@
                @if ($mensajex)
 
 
-                    @if ($mierror)
+                        @if ($mierror)
 
                             <div class="alert alert-danger" role="alert">
                                 {{$mensajex}}
@@ -275,7 +275,7 @@
 
                                 
 
-                                @foreach ($items as $key => &$value)
+                                @foreach ($items as $key => $value)
             
                             
                             {{--  <tr class="{{$control == $key ? $status:''}}">   --}}
@@ -308,7 +308,17 @@
                                         <td>{{$value['description']}}</td>
                                         <td>{{$value['upc']}}</td>
                                         <td>{{$value['pallet']}}</td>
-                                        <td>{{$value['price']}}</td>
+                                        {{-- <td>{{$value['price']}}</td> --}}
+
+                                        <td><input wire:model="prices.{{$key}}" 
+                                            id="prices" type="number" 
+                                            class="form-control @error('prices.'.$key) is-invalid @enderror" name="prices" >
+                                        
+                                            <span class="error">
+                                                @error('prices.'.$key) {{ $message }} @enderror
+                                            </span>
+                                        
+                                        </td>
             
             
                                         <td><input wire:model="notes.{{$key}}" 
@@ -322,7 +332,9 @@
                                         </td>
             
             
-                                        <td>{{!empty($notes[$key])? $value['price'] - $notes[$key] :$value['price']}}</td>
+                                        {{-- <td>{{!empty($notes[$key])? $value['price'] - $notes[$key] :$value['price']}}</td> --}}
+
+                                        <td>{{!empty($notes[$key])? (float) $prices[$key] - (float) $notes[$key] :(float) $prices[$key]}}</td>
             
                                 
                                         <td><input wire:model="qtyone.{{$key}}" 
